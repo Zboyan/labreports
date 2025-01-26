@@ -1,34 +1,3 @@
-<!-- INTRODUCTION SECTION -->
-<!-- -------------------------------------------------------------------------------------------- -->
-<!-- -------------------------------------------------------------------------------------------- -->
-<!-- -------------------------------------------------------------------------------------------- -->
-<!-- -------------------------------------------------------------------------------------------- -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Template for Fractal Geometry Computational Lab Reports" />
-  <link rel="stylesheet" href="https://latex.vercel.app/style.css" />
-  <link 
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"
-  />
-  <script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$','$$'], ['\\[','\\]']],
-      }
-    }
-  </script>
-  <title>Fractal Geometry Lab Report</title> 
-</head>
-<body id="top">
-
-
-
 
   <header>
     <h1>Fractal Geometry Lab Report</h1>
@@ -52,7 +21,7 @@
         <h2>Introduction</h2>
         <p>
           This is how to do a lab report. I'm not really sure what else to put here.
-          Is this where Module 1 goes, LOL? I guess so. This is for Module 1 Turtle Graphics:
+          Is this where Module 1 goes, LOL? I guess so. This is a brief intro for Module 1 Turtle Graphics:
 
 		This code will initialize a turtle, set the turtle's color and background, move the turtle to a suitable starting position, draw a simple square, and display the drawing.
 		The code will then be altered to adjust the above. Different shapes, directions, and background color will be coded.
@@ -61,40 +30,13 @@
 		The code will then be altered to adjust the above. Different shapes, directions, and background color will be coded.
 
 		The third set of code will combine the idea behind the two previous sets. 
-		A turtle will be drawn on top of a randomly colored octagon and 16-gon. Each side will be a different color.
+		A turtle will be drawn on top of a randomly colored square to 64-gon. 
+		Each side will be a different color. The direction of motion will switch each shape.
+		The first set of code will then be condensed to more efficently perform the same thing.
 
-
-	
         </p>
       </section>
 
-
-     
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<pre><code class="language-python">
-	# This is just a sample Python code block
-	# demonstrating how code might be displayed.
-
-	import numpy as np
-	import matplotlib.pyplot as plt
-
-	x = np.linspace(-10, 10, 100)
-	y = 2*x + 5
-
-	plt.plot(x, y)
-	plt.title("Sample Plot")
-	plt.show()
-	</code></pre>
-
-
-
-
-
-
-      </section>
 
       <!-- RESULTS & ANALYSIS SECTION -->
       <!-- -------------------------------------------------------------------------------------------- -->
@@ -106,48 +48,52 @@
       
         <h2>Results &amp; Analysis</h2>
         <p>
+
+FIRST CODE SET:
+		
           The first set of sample code initialized a turtle. It set the line color of the path to be blue and the background color to be white. 
 		The turtle started at X=200 and Y=200. It faced up, or north, at 0 degrees.
 		A square was then drawn using the loop feature. This was easily done by setting the angle to 90 degrees. A right turn was made after every 100 distance forwards.
 		The drawing was then shown. 
 
 		See the code below:
-			# GIVEN EXAMPLE: Initialize the turtle
-			initializeTurtle()
-			showturtle()
-			color('blue')
-			bgcolor('white')
+		# GIVEN EXAMPLE: Initialize the turtle
+		initializeTurtle()
+		showturtle()
+		color('blue')
+		bgcolor('white')
 
-			# Move to a suitable starting position
-			jump(200, 200)  # Adjust these values as needed to center the square
-			face(0)  # Ensure the turtle is facing up
+		# Move to a suitable starting position
+		jump(200, 200)  # Adjust these values as needed to center the square
+		face(0)  # Ensure the turtle is facing up
 
 
-			# Draw a simple square
+		# Draw a simple square
 			for _ in range(4):
 			  forward(100)
 			  right(90)
 
 
-			# Display the drawing
-			show()
+		# Display the drawing
+		show()
 
-	  The first set of experimented code initialized a turtle. It set the line color of the path to be orange and the background color to be black. 
+	  The first set of experimented code initialized a turtle. It set the line color of the path to be orange and the background color to be black. This looked cool!
 		The turtle started at X=400 and Y=200. It faced down, or south, at 180 degrees.
 		An octagon was then drawn using the loop feature. This was easily done by setting the angle to 45 degrees. A right turn was made after every 50 distance forwards.
-		A 16-gon was then drawn using the loop feature. This was easily done by setting the angle to 22.5 degrees. A right turn was made after every 50 distance backwards.
-		The drawings were then shown. 
+		Then, a 16-gon was then drawn using the loop feature. This was easily done by setting the angle to 22.5 degrees. A right turn was made after every 50 distance backwards.
+		The drawings were then shown. I could have drawn more, but I did not want to clutter the space so much.
 
+		See the code below:
 		# Experimental EXAMPLE: Initialize the turtle
-			initializeTurtle()
-			showturtle()
-			color('orange') #line color is now orange
-			bgcolor('black') #background color is now black
-			#method(parameter)
+		initializeTurtle()
+		showturtle()
+		color('orange') #line color is now orange
+		bgcolor('black') #background color is now black
+		#method(parameter)
 
 		# Move to a suitable starting position
-			jump(400, 200)  # kept the same starting location on y, but shifted x right 200
-			face(180)  # Ensure the turtle is facing down
+		jump(400, 200)  # kept the same starting location on y, but shifted x right 200
+		face(180)  # Ensure the turtle is facing down
 
 		#Shape 1:
 		# Draw a simple octagon using the loop function
@@ -161,44 +107,236 @@
 		  backward(50) #go backward 50
 		  right(22.5) #turns 22.5 degrees clockwise
 
+		# Display the drawing
+		show()
+
+SECOND CODE SET:
+
+	 The second set of sample code drew a set of randomly colored polygons that steadily increased in size and side length.
+		It started with 3 sides and continued, increasing side length by 1, until it got to 20 sides. 
+		Between each shape, the pen was lifted before drawing the next shape. 
+		Each polygon was guaranteed to have a vertical left side.
+		Later polygons overlapped with each other or became more circular due to the increased sizes.
+
+		See code below:
+		#This lesson will draw a set of randomly colored polygons
+		#sample code
+
+		# Step 1: Initialize the turtle canvas
+		canvas_width = 1000
+		canvas_height = 800
+		initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+
+		# Step 2: Set up helper functions for random colors and drawing polygons
+
+		import random
+		import math
+
+		# Function to generate a random color in RGB format
+		def random_color():
+		    r = random.random()
+ 		    g = random.random()
+  		    b = random.random()
+   		    return color_rgb(r, g, b)
+
+		# Function to draw a polygon with 'n_sides' and the given 'side_length'
+		def draw_polygon(n_sides, side_length):
+		    angle = 360 / n_sides  # Calculate the internal angle of the polygon
+		    for _ in range(n_sides):
+ 	  	     forward(side_length)
+  	  	     right(angle)
+
+		# Step 3: Draw a horizontal line of polygons, increasing the number of sides from 3 to 20
+
+		# Starting position for the line of polygons (positive coordinates, on-screen)
+		start_x = 100  # Start at x = 200 (positive)
+		start_y = 300  # Start at y = 300 (positive, going down the canvas)
+		jump(start_x, start_y)  # Move the turtle to the starting point
+
+		side_length = 20  # Length of each side of the polygon
+		spacing = 20  # Spacing between each polygon
+
+		for n_sides in range(3, 20):
+ 		   color(random_color())  # Set a random color for each polygon
+ 		   draw_polygon(n_sides, side_length)  # Draw the polygon with n sides
+  		   penup()  # Stop drawing when moving to the next position
+   	 	   jump(getx() + spacing + side_length, start_y)  # Move to the right for the next polygon
+   	  	   pendown()  # Start drawing again
+
+		# Step 4: Display the result
+		show()
+
+	 The second set of experimental code drew a set of randomly colored polygons that steadily increased in size and side length.
+		It started with 4 sides and continued, increasing side length by 1, until it got to 15 sides. 
+		Between each shape, the pen was lifted before drawing the next shape. 
+		Each polygon was guaranteed to have a vertical left side. 
+		The increased spacing to 40 made each polygon more visible.
+		The black background and the neon colors made the shapes pop.
+		I could have drawn more, but I did not want to clutter the space so much.
+
+		See code below:
+		#This lesson will draw a set of randomly colored polygons
+		#experimental code
+
+		# Step 1: Initialize the turtle canvas
+		# I made the width wider and the height shorter
+		canvas_width = 1500
+		canvas_height = 600
+		initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+		bgcolor('black') #background color is now black
+
+		# Step 2: Set up helper functions for random colors and drawing polygons
+
+		import random
+		import math
+
+		# Function to generate a random color in RGB format
+		def random_color():
+    		    r = random.random()
+    		    g = random.random()
+    		    b = random.random()
+    		    return color_rgb(r, g, b)
+
+		# Function to draw a polygon with 'n_sides' and the given 'side_length'
+		def draw_polygon(n_sides, side_length):
+		    angle = 360 / n_sides  # Calculate the internal angle of the polygon
+   		    for _ in range(n_sides):
+       		      forward(side_length) #this moves the shape forward (x+) by the side_length
+        	      right(angle) #this makes the shape have a vertical side on the left
+
+		# Step 3: Draw a horizontal line of polygons, increasing the number of sides from 4 to 15
+		# I started with a square and ended with a 15-gon, just because
+
+		# Starting position for the line of polygons (positive coordinates, on-screen)
+		# slightly adjusted the starting position
+		start_x = 150  # Start at x = 150 (positive)
+		start_y = 300  # Start at y = 300 (positive, going down the canvas)
+		jump(start_x, start_y)  # Move the turtle to the starting point
+
+		side_length = 40  # Length of each side of the polygon is now 40
+		spacing = 40  # Spacing between each polygon is now 40
+
+		for n_sides in range(4, 15):
+    		    color(random_color())  # Set a random color for each polygon
+    		    draw_polygon(n_sides, side_length)  # Draw the polygon with n sides
+    		    penup()  # Stop drawing when moving to the next position
+    		    jump(getx() + spacing + side_length, start_y)  # Move to the right for the next polygon
+    		    pendown()  # Start drawing again
+    		    # this will draw every polygon from 4 sides to 15 sides with spacing
+
+		# Step 4: Display the result
+		show()
+		#the neon colors look cool on the black background!
+
+THIRD CODE SET:
+
+	 The third set of code combines concepts from the first two sets. It had a turtle follow paths of shapes that increasing sides in random colors.
+		The first code was written by spearating each shape into its own loop.
+		The second code was written by clumping shapes with an if/else loop based on if the turtle moved backwards or forwards.
+		The background was set to black to make the shapes pop. Side length was 25 to make the shapes fit on a default size grid. 
+		The center was at x=600 and y=300
+
+		See code below:
+		# This code installs the turtle library
+			!wget -O turtle_setup.py 'https://raw.githubusercontent.com/williamedwardhahn/fractal25/refs/heads/main/turtle_setup.py'
+			from turtle_setup import *
+
+		# Combined FUN EXAMPLE: Using the turtle path: I made a octagon, then 16-gon that produced random colors of lines
+		# The starting line is yellow, but it's still randomized
+		#Initialize the turtle
+		initializeTurtle()
+		showturtle()
+		color('yellow')
+		bgcolor('black')
+
+		#Set up helper functions for random colors and drawing polygons
+
+		import random
+		import math
+
+		# Function to generate a random color in RGB format
+		def random_color():
+    		    r = random.random()
+    		    g = random.random()
+    		    b = random.random()
+   		    return color_rgb(r, g, b)
+
+		# Move to a suitable starting position
+		jump(600, 300)  # Adjust these values as needed to center the shapes
+		face(0)  # Ensure the turtle is facing up
+
+
+		#Draw a simple square, then octagon, then 16-gon, then 32-gon, then 64-gon
+		#this could be further increased with "powers of 2" using more loop functions
+		#in the next set of code, I will use 1-2 loop functions to combine/clump by pattern 
+		#all shapes in random colors, with side distance 25 
+		#odd index shapes the turtle will move backwards while even index forwards
+
+		#square, first shape
+		for _ in range(4):
+  		   color(random_color())
+  		   backward(25)
+  		   right(90)
+
+		#octagon, second shape
+		for _ in range(8):
+  		   color(random_color())
+  		   forward(25)
+  		   right(45)
+
+		#16-gon, third shape
+		for _ in range(16):
+  		   color(random_color())
+  		   backward(25) 
+ 		   right(22.5) 
+
+		#32-gon, fourth shape
+		for _ in range(32):
+  		   color(random_color())
+  		   forward(25)
+  		   right(11.25)
+
+		#64-gon, fifth shape
+		for _ in range(64):
+  		   color(random_color())
+                   backward(25)
+ 		   right(5.625)
+
+		# Display the drawing
+                show()
+
+		#1 loops from square to 64-gon are completed
+
+	This is a more refined code that does the same thing.
+
+		#Here is a more compact version of the same code
+		#the if/else loop sorts the backwards/forwards motions
+		#a function is defined to draw polygons
+		def draw_polygon(sides, side_length, move_backward=False):
+    			angle = 360 / sides
+    			for _ in range(sides):
+        			color(random_color())
+       				if move_backward:
+            				backward(side_length)
+        			else:
+            				forward(side_length)
+        			right(angle)
+
+		#polygons of increasing sides from square to 64-gon are drawn
+		side_length = 25
+		draw_polygon(4, side_length, move_backward=True)  # Square
+		draw_polygon(8, side_length, move_backward=False)  # Octagon
+		draw_polygon(16, side_length, move_backward=True)  # 16-gon
+		draw_polygon(32, side_length, move_backward=False)  # 32-gon
+		draw_polygon(64, side_length, move_backward=True)  # 64-gon
 
 		# Display the drawing
 		show()
 
-	 The second set of sample code
-
-	 The second set of experimental code
-
-	 The third set of code combines concepts from the first two sets.
+		#2 loops from square to 64-gon are completed
 		
-		In this placeholder section, you might describe observations,
-          results, or insights gained from any analysis. You can incorporate 
-          references to equations (e.g., $y = mx + b$) or embed images and 
-          other visual aids to illustrate your points.
-
 	
         </p>
-
-
-
-
-        <figure>
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/800px-Mandel_zoom_00_mandelbrot_set.jpg"
-            alt="Mandelbrot Broad View"
-            width="600"
-            height="400"
-            loading="lazy"
-          />
-          <figcaption>
-            <strong>Figure 1:</strong> A broad view of the Mandelbrot set 
-            (max_iter = 100). Colors represent how many iterations were 
-            needed to exceed |z|=2.
-          </figcaption>
-        </figure>
-
-
-
 
       </section>
 
@@ -211,9 +349,11 @@
       <!-- -------------------------------------------------------------------------------------------- -->
       <section id="conclusion">
         <h2>Conclusion</h2>
-        <p>
-          In this sample conclusion, we highlight how the iterative approach to generating fractals reveals the vast complexity inherent in seemingly simple equations. Through our Python implementation, we observed that small parameter changes can produce markedly different fractal patterns, underscoring the Mandelbrot set's boundless intricacy. Our visualizations not only confirm the self-similarity and infinite resolution of the set, but also underscore the crucial role of computational optimizations in making high-resolution explorations feasible. Ultimately, this lab demonstrates that fractal geometry, far from being mere mathematical curiosities, provides deep insights into pattern formation and complexity in both pure mathematics and broader scientific contexts. 
-        </p>
+        <p> The purpose of this first module was for exploring and learning basic coding tactics off of provided code. 
+		I took care to make each example a little different. 
+		Then, I successfully combined the two examples into a more complex version. 
+	</p>
+
       </section>
 
      
