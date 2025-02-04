@@ -53,20 +53,57 @@
 	<!-- -------------------------------------------------------------------------------------------- -->
 	<section id="code">
 	<pre><code class="language-python">
-	# This is just a sample Python code block
-	# demonstrating how code might be displayed.
+	
+Sample Code Set #1: Random Walk Function
+		This code imports a custom turtle library to use various turtle functions. 
+		At first, the code did not work because the command was non-standard, so this had to be imported.
+		Random import allows us to use various random functions later on.
+		The canvas is initialized with width of 1000 and height of 800
+		The random walk function is defined.
+		The jump and penup command moves the start to 450x450
+		A loop is used to repeat the functions 1000 times (steps) with distance of 10 pixels (step length).
+		The result is then displayed.
 
-	import numpy as np
-	import matplotlib.pyplot as plt
+		<img src="images/example.jpg" alt="See the Image" />
+		See coe below:
+		
+		
 
-	x = np.linspace(-10, 10, 100)
-	y = 2*x + 5
+#Sample Code Set 1 (intact as you gave, besides for one fix and some comments)
+import random
 
-	plt.plot(x, y)
-	plt.title("Sample Plot")
-	plt.show()
-	</code></pre>
+# This code installs the turtle library
+!wget -O turtle_setup.py 'https://raw.githubusercontent.com/williamedwardhahn/fractal25/refs/heads/main/turtle_setup.py'
+from turtle_setup import *
+#At first, the code did NOT work. Upon analyzing the error, I went back and grabbed this above code from Module 1
 
+# Step 1: Initialize the turtle canvas
+canvas_width = 1000
+canvas_height = 800
+initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+#the canvass width is set to 1000 by 800 pixels
+#initially, the code did NOT work before the Hahn turtle library was stated as the "initialize turtle" is non-standard
+
+# Step 2: Function to perform a random walk (Brownian motion)
+#The random walk function is something I recognize from Statistics class of "Time Series" 
+def random_walk(steps, step_length):
+    speed(0)             # Set speed to maximum for faster drawing
+    penup()               #raises pen to move it
+    jump(450, 450)       # Start near the middle of the canvas
+    pendown()             #puts pen down to draw
+
+    for _ in range(steps):
+        forward(step_length)               # Move forward by the step length
+        right(random.uniform(-180, 180))   # Turn by a random angle between -180 and 180 degrees
+
+# Step 3: Execute the random walk with increased steps and/or step length
+steps = 1000
+step_length = 10
+
+random_walk(steps, step_length)
+
+# Step 4: Display the result
+show()
 
 
 
