@@ -69,7 +69,6 @@
 		<img src="https://github.com/Zboyan/labreports/blob/main/picture2.png" alt="See the Image" />
 		
 		See code below:
-			
 
 #Sample Code Set 1 (intact as you gave, besides for one fix and some comments)
 import random
@@ -165,7 +164,6 @@ show()		#This looks like an animal with a tail and short limbs!
 		
 		See code below:
 
-
 #Experimental Code Set 1B (more steps, smaller length)
 import random
 
@@ -253,8 +251,103 @@ random_walk(steps, step_lengths)
 
 # Step 4: Display the result with these new features
 show()
+		
+
+		Sample Code Set 2: Building the Koch Snowflake piece by piece
+		-This code steadily builds the Koch Snowflake, one side or section at a time.
+		-First, the canvas is initialized
+		-The start is set at 50x400 and the turtle faces up (90 degrees).
+		-A blip/zig zag bump is then drawn in a horizontal line using a 60 CCW, 120 CW, 60 CCW degree rotation
+		-The result is shown
+
+		See Image:
+		<img src="https://github.com/Zboyan/labreports/blob/main/picture6.png" alt="See the Image" />
+		
+		See code below:
+
+#Sample Code Set #2 (what you gave us)
+initializeTurtle()
+showturtle()
+
+jump(50, 400)
+face(90)
+
+# Line with blip
+forward(800 / 3)
+left(60) 
+forward(800 / 3)
+right(120)
+forward(800 / 3)
+left(60)
+forward(800 / 3)
+
+show()
 
 
+		Sample Code Set 2B: Building the Koch Snowflake piece by piece
+		-This code steadily builds the Koch Snowflake, one side or section at a time.
+		-Different orders of recursion are used.
+		-The red line is the line from before (2), it has order of recursion 1.
+		-A more advanced blip line is then drawn in blue above the red blip line.
+		-The blue line has nested zigzags/blips from its order of recursion 2.
+		-The result is shown
+
+		See Image:
+		<img src="https://github.com/Zboyan/labreports/blob/main/picture7.png" alt="See the Image" />
+		
+		See code below:
+
+#Sample Code Set #2B (what you gave us)
+# Define the blip_line function
+def blip_line(length, order):
+    if order == 0:
+        forward(length)
+    else:
+        blip_line(length / 3, order - 1)
+        left(60)
+        blip_line(length / 3, order - 1)
+        right(120)
+        blip_line(length / 3, order - 1)
+        left(60)
+        blip_line(length / 3, order - 1)
+
+initializeTurtle()
+
+# Draw blip lines of different orders
+jump(50, 400)
+face(90)
+color('red')
+blip_line(800, 1)  # Order 1
+
+jump(50, 350)
+face(90)
+color('blue')
+blip_line(800, 2)  # Order 2
+
+show()
+
+		Sample Code Set 2C: Building the Koch Snowflake piece by piece
+		-This code steadily builds the Koch Snowflake, one side or section at a time.
+		-A green blip line is produced with order of recursion 3. 
+		-This has more sets of nested blips than prior orders.
+		-As more orders are produced, the pattern gets closer the a Koch Snowflake.
+		-The result is shown
+
+		See Image:
+		<img src="https://github.com/Zboyan/labreports/blob/main/picture8.png" alt="See the Image" />
+		
+		See code below:
+		
+#Sample Code Set 2C (what you gave us)
+initializeTurtle()
+showturtle()
+
+jump(50, 300)
+face(90)
+color('green')
+blip_line(800, 3)  # Order 3
+
+show()
 		
       </section>
 
