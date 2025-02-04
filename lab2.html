@@ -54,20 +54,22 @@
 	<section id="code">
 	<pre><code class="language-python">
 	
-Sample Code Set #1: Random Walk Function
-		This code imports a custom turtle library to use various turtle functions. 
-		At first, the code did not work because the command was non-standard, so this had to be imported.
-		Random import allows us to use various random functions later on.
-		The canvas is initialized with width of 1000 and height of 800
-		The random walk function is defined.
-		The jump and penup command moves the start to 450x450
-		A loop is used to repeat the functions 1000 times (steps) with distance of 10 pixels (step length).
-		The result is then displayed.
+		Sample Code Set #1: Random Walk Function
+		-This code imports a custom turtle library to use various turtle functions. 
+		-At first, the code did not work because the command was non-standard, so this had to be imported.
+		-Random import allows us to use various random functions later on.
+		-The canvas is initialized with width of 1000 and height of 800
+		-The random walk function is defined.
+		-The jump and penup command moves the start to 450x450
+		-A loop is used to repeat the functions 1000 times (steps) with distance of 10 pixels (step length).
+		-The result is then displayed. I ran the code twice, to verify the random-ness.
 
-		<img src="images/example.jpg" alt="See the Image" />
-		See coe below:
+		See Images:
+		<img src="https://github.com/Zboyan/labreports/blob/main/picture1.png" alt="See the Image" />
+		<img src="https://github.com/Zboyan/labreports/blob/main/picture2.png" alt="See the Image" />
 		
-		
+		See code below:
+			
 
 #Sample Code Set 1 (intact as you gave, besides for one fix and some comments)
 import random
@@ -104,11 +106,156 @@ random_walk(steps, step_length)
 
 # Step 4: Display the result
 show()
+		
+
+		Experimental Code Set 1A: Altering the Random Walk Code:
+		Some adjustments were made to the original code, namely:
+		-A black background 
+		-Use of a random vibrant color for each step, from a predetermined list of 8 colors
+
+		See Image:
+		<img src="https://github.com/Zboyan/labreports/blob/main/picture3.png" alt="See the Image" />
+		
+		See code below:
+
+#Experimental Code Set 1A (black background, varying random vibrant colors)
+import random
+
+# Step 1: Initialize the turtle canvas
+canvas_width = 1000
+canvas_height = 800
+initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+
+# Set background color to black
+bgcolor("black")
+
+# Define a list of vibrant colors
+vibrant_colors = ["red", "lime", "cyan", "magenta", "yellow", "orange", "blue", "purple"]
+
+# Step 2: Function to perform a random walk (Brownian motion)
+def random_walk(steps, step_length):
+    speed(0)  # Set speed to maximum for faster drawing
+    penup()
+    jump(450, 450)  # Start near the middle of the canvas
+    pendown()
+
+    for _ in range(steps):
+        color(random.choice(vibrant_colors))  # Choose a random vibrant color
+        forward(step_length)  # Move forward by the step length
+        right(random.uniform(-180, 180))  # Turn by a random angle
+
+# Step 3: Execute the random walk with increased steps and/or step length
+steps = 1000
+step_length = 10
+random_walk(steps, step_length)
+
+# Step 4: Display the result with the goal of eye popping design
+show()		#This looks like an animal with a tail and short limbs!
+
+		
+		Experimental Code Set 1B: More altering the Random Walk Code:
+		Some more adjustments were made to the previous code, namely:
+		-a reduced canvas size of 500x400
+		-adjusted start to 250x250
+		-increased steps to 2000 and decresed step length to 5
+		
+
+		See Image:
+		<img src="https://github.com/Zboyan/labreports/blob/main/picture4.png" alt="See the Image" />
+		
+		See code below:
 
 
+#Experimental Code Set 1B (more steps, smaller length)
+import random
+
+# Step 1: Initialize the turtle canvas
+canvas_width = 500
+canvas_height = 400
+initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+#I reduced canvas width
+
+# Set background color to black
+bgcolor("black")
+
+# Define a list of vibrant colors
+vibrant_colors = ["red", "lime", "cyan", "magenta", "yellow", "orange", "blue", "purple"]
+
+# Step 2: Function to perform a random walk (Brownian motion)
+def random_walk(steps, step_length):
+    speed(0)  # Set speed to maximum for faster drawing
+    penup()
+    jump(250, 250)  # Start near the middle of the canvas
+    pendown()
+
+    for _ in range(steps):
+        color(random.choice(vibrant_colors))  # Choose a random vibrant color
+        forward(step_length)  # Move forward by the step length
+        right(random.uniform(-180, 180))  # Turn by a random angle
+
+# Step 3: Execute the random walk with 2000 steps and/or step length of 5 now
+steps = 2000
+step_length = 5
+random_walk(steps, step_length)
+
+# Step 4: Display the result with the goal of eye popping design that fit on a smaller canvas
+show()
+		
+
+		Experimental Code Set 1C: More altering the Random Walk Code:
+		Some more adjustments were made to the previous code, namely:
+		-a varying step size from a random selection of 4 odd numbers: 3, 5, 7, or 9
+		-if/else loop to sometimes reflect the turtle motion, creating a mirrored pattern
+
+		See Image:
+		<img src="https://github.com/Zboyan/labreports/blob/main/picture5.png" alt="See the Image" />
+		
+		See code below:
+
+#Experimental Code Set 1C (varying step size)
+import random
+
+# Step 1: Initialize the turtle canvas
+canvas_width = 500
+canvas_height = 400
+initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+
+# Set background color to black
+bgcolor("black")
+
+# Define a list of vibrant colors
+vibrant_colors = ["red", "lime", "cyan", "magenta", "yellow", "orange", "blue", "purple"]
+
+# Step 2: Function to perform a random walk with varying step lengths and symmetry
+def random_walk(steps, step_lengths):
+    speed(0)  # Set speed to maximum for faster drawing
+    penup()
+    jump(250, 200)  # Start near the center of the canvas
+    pendown()
+
+    for _ in range(steps):
+        color(random.choice(vibrant_colors))  # Choose a random vibrant color
+
+        # Varying step length
+        step_length = random.choice(step_lengths)  # Pick a random step size
+        forward(step_length)  # Move forward by the step length
+
+        # Symmetry: Reflect the movement across the vertical axis
+        if random.choice([True, False]):
+            left(180)  # Turn by 180 degrees (reflecting horizontally)
+
+        right(random.uniform(-180, 180))  # Random turn to maintain randomness
+
+# Step 3: Execute the random walk with varying step lengths and 2000 steps
+steps = 2000
+step_lengths = [3, 5, 7, 9]  # 4 Different possible step lengths
+random_walk(steps, step_lengths)
+
+# Step 4: Display the result with these new features
+show()
 
 
-
+		
       </section>
 
       <!-- RESULTS & ANALYSIS SECTION -->
