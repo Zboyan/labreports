@@ -720,6 +720,76 @@ for i in range(5):
 
 show()
 
+</p>
+</p>
+		Final Code Set: Drew both Snowflake and Dragon in random colors
+		-Presented both fractals in one screen with each a random color from a choice of 5 colors. 
+		-Dragon on the left and Snowflake on the right in a black background.
+		-The start points are adjusted so they do not overlap.
+		-It is neat to see both together to compare and contrast.
+
+		See Image:
+		<img src="https://github.com/Zboyan/labreports/blob/main/picture16.png" alt="See the Image" />
+		
+		See code below:
+
+#Displays a Dragon curve and Koch snowflake in random colors on left and right side on screen
+import random
+
+# Dragon Curve Function
+def dragon_curve(order, length, turn_direction):
+    if order == 0:
+        forward(length)
+    else:
+        new_length = length / (2 ** 0.5)
+        dragon_curve(order - 1, new_length, 1)
+        right(turn_direction * 90)
+        dragon_curve(order - 1, new_length, -1)
+
+# Koch Snowflake Function
+def koch_snowflake(order, length):
+    if order == 0:
+        forward(length)
+    else:
+        length /= 3
+        koch_snowflake(order - 1, length)
+        left(60)
+        koch_snowflake(order - 1, length)
+        right(120)
+        koch_snowflake(order - 1, length)
+        left(60)
+        koch_snowflake(order - 1, length)
+
+# Initialize the Turtle and Screen
+initializeTurtle()
+#shrunk canvas size
+canvas_width = 700
+canvas_height = 500
+initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+bgcolor('black')  # Set background color
+
+# Draw the Dragon Curve on the Left Side
+jump(100, 300)  # Move to the left side
+face(0)  # Set starting direction
+color(random.choice(['cyan', 'lime', 'magenta', 'red', 'yellow']))  # Random color
+dragon_curve(10, 300, 1)  # Draw dragon curve
+
+# Draw the Koch Snowflake on the Right Side
+jump(500, 300)  # Move to the right side
+face(0)  # Reset direction
+color(random.choice(['cyan', 'lime', 'magenta', 'red', 'yellow']))  # Random color
+
+# Draw all three sides of the Koch Snowflake
+for _ in range(3):
+    koch_snowflake(4, 200)  # Draw Koch Snowflake
+    right(120)  # Turn to draw the next side
+
+# Show Final Drawing
+show()
+
+</p>
+</p>
+		
       </section>
 
       <!-- RESULTS & ANALYSIS SECTION -->
@@ -732,31 +802,26 @@ show()
       
         <h2>Results &amp; Analysis</h2>
         <p>
-          In this placeholder section, you might describe observations,
-          results, or insights gained from any analysis. You can incorporate 
-          references to equations (e.g., $y = mx + b$) or embed images and 
-          other visual aids to illustrate your points.
+          Summary from the TED talk: 
+		"He prefers “roughness.” It fits better.
+		Talks about a Cauliflower and repeated cutting if it.
+		D is a practical measure of roughness. Space-filling area. 
+		D = roughness, a parameter that is often calculated off of fractal shapes or shapes that did not exist even in nature. 
+		An example is the Peano curve. In a snowflake, drawing “Mandelbrot curves” makes the shape seem more natural. 
+		Fractals have applications in Finance such as stock charts. 
+		Fractals also help refine bell curves. 
+		He concluded the talk about the Mandelbrot Set and it’s simple z = z^2 + c equation. 
+		The shape is emphasized with different colors or patterns around it."
+
         </p>
 
-
-
-
-        <figure>
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/800px-Mandel_zoom_00_mandelbrot_set.jpg"
-            alt="Mandelbrot Broad View"
-            width="600"
-            height="400"
-            loading="lazy"
-          />
-          <figcaption>
-            <strong>Figure 1:</strong> A broad view of the Mandelbrot set 
-            (max_iter = 100). Colors represent how many iterations were 
-            needed to exceed |z|=2.
-          </figcaption>
-        </figure>
-
-
+	Comparing the Snowflake and the Dragon. 
+	      The Snowflake starts with an equilaterial triangle while the Dragon starts with a line.
+	      The Snowflake is self-similar while the Dragon is self-intersecting.
+	      The Snowflake has smooth transitions while the Dragon has intersecting ones.
+	      The Snowflake is symmetric while the Dragon is not.
+	      The Snowflake does not fill a 2D space like the Dragon does.
+	      The Snowflake has a predictable shape while the Dragon does not.
 
 
       </section>
@@ -771,16 +836,14 @@ show()
       <section id="conclusion">
         <h2>Conclusion</h2>
         <p>
-          In this sample conclusion, we highlight how the iterative approach to generating fractals reveals the vast complexity inherent in seemingly simple equations. Through our Python implementation, we observed that small parameter changes can produce markedly different fractal patterns, underscoring the Mandelbrot set's boundless intricacy. Our visualizations not only confirm the self-similarity and infinite resolution of the set, but also underscore the crucial role of computational optimizations in making high-resolution explorations feasible. Ultimately, this lab demonstrates that fractal geometry, far from being mere mathematical curiosities, provides deep insights into pattern formation and complexity in both pure mathematics and broader scientific contexts. 
-        </p>
+          This conclusion emphasizes how the iterative process of fractal generation unveils the complexity hidden within.  
+		With even slight parameter adjustments, unique fractal patterns were created.  
+		The designs show the theory behind fractals such as the Mandelbrot Set, Koch Snowflake, and Dragon Curve along with the power of coding.
+		Thus, fractals have many application across fields.
       </section>
 
      
-     
-     
-   
-     
-     
+
      
   </main>
 
