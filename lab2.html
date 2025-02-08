@@ -364,7 +364,362 @@ show()
 
  </p>
  </p>
+
+		Sample Code Set 2D: The Complete Koch Snowflake
+		-The complete Koch Snowflake is drawn.
+		-The blipline function is used to draw this shape.
+		-If the order is 0, a straight line is drawn.
+		-Otherwise (else), the line is broken into four segments to create the zigzag.
+		-The segments are as follows straight line, 60 CCW, 120 CW, 60 CCW degree rotation.
+		-The function is called, or repeated, thrice.
+		-The shape is drawn with pixel length 400 and all in blue.
+		-The result is shown.
+
+		See Image:
+		<img src="https://github.com/Zboyan/labreports/blob/main/picture9.png" alt="See the Image" />
 		
+		See code below:
+		
+#Sample Code Set 2D (what you gave us)
+initializeTurtle()
+showturtle()
+
+# Define the blip_line function (Koch curve)
+def blip_line(length, order):
+    if order == 0:
+        forward(length)
+    else:
+        blip_line(length / 3, order - 1)
+        left(60)
+        blip_line(length / 3, order - 1)
+        right(120)
+        blip_line(length / 3, order - 1)
+        left(60)
+        blip_line(length / 3, order - 1)
+
+# Draw the Koch snowflake
+def koch_snowflake(length, order):
+    for _ in range(3):
+        blip_line(length, order)
+        right(120)
+
+# Set up the turtle
+jump(250, 500)
+face(0)
+color('blue')
+
+# Draw the snowflake
+length = 400
+order = 3
+koch_snowflake(length, order)
+
+show()
+
+ </p>
+ </p>
+
+		Experimental Code Set 2: Broken Snowflake
+		-I adjusted the background color to black and line color to lime.
+		-A small rotation angle of 10 degrees is introduced which adds an extra rotation.
+		-This creates asymmetry and pinches the snowflake in on itself.
+
+		See Image:
+		<img src="https://github.com/Zboyan/labreports/blob/main/picture11.png" alt="See the Image" />
+		
+		See code below:
+		
+#Experimental Code Set 2: I "broke" the snowflake a bit
+initializeTurtle()
+showturtle()
+
+# Set background color to black
+bgcolor("black")
+
+# Define the blip_line function (Koch curve) with rotation
+def blip_line(length, order, rotation_angle):
+    if order == 0:
+        forward(length)
+    else:
+        blip_line(length / 3, order - 1, rotation_angle)
+        left(60)
+        blip_line(length / 3, order - 1, rotation_angle)
+        right(120)
+        blip_line(length / 3, order - 1, rotation_angle)
+        left(60)
+        blip_line(length / 3, order - 1, rotation_angle)
+
+# Draw the Koch snowflake with rotation
+def koch_snowflake(length, order):
+    rotation_angle = 10  # Small rotation angle for effect
+    for _ in range(3):
+        blip_line(length, order, rotation_angle)
+        right(120)
+        # Apply additional rotation effect after each side
+        right(rotation_angle)
+
+# Set up the turtle
+jump(250, 500)
+face(0)
+color('lime')
+
+# Draw the snowflake
+length = 400
+order = 3
+koch_snowflake(length, order)
+
+show()
+
+ </p>
+ </p>
+
+		Experimental Code Set 2B: Further Broken
+		-The Snowflake became even more distorted with this code.
+		-A random rotation angle of 30 degrees CCW to 30 degrees CW was introduced 
+		-A random length of each segment of 0.8 to 1.2 was introduced.
+		-A random color choice from 5 colors was introduced.
+		-A smaller canvas was applied.
+		-The snowfalke appears distorted due to varying angles, colors, and lengths.
+
+		See Image:
+		<img src="https://github.com/Zboyan/labreports/blob/main/picture12.png" alt="See the Image" />
+		
+		See code below:
+		
+#Experimental Code Set 2B: I "broke" the snowflake more + randomized colors and angles
+import random
+
+# Define the blip_line function (Koch curve) with random rotation and length variations
+def blip_line(length, order, rotation_angle):
+    if order == 0:
+        forward(length)
+    else:
+        # Randomize rotation and length to "break" the snowflake
+        random_rotation = random.randint(-30, 30)  # Random rotation within -30 to 30 degrees
+        random_length = length * random.uniform(0.8, 1.2)  # Randomize length by 80%-120%
+        
+        # Apply randomization
+        color(random.choice(['cyan', 'lime', 'magenta', 'red', 'yellow']))
+        blip_line(random_length / 3, order - 1, rotation_angle + random_rotation)  # Apply rotation variation
+        left(60)
+        
+        color(random.choice(['cyan', 'lime', 'magenta', 'red', 'yellow']))
+        blip_line(random_length / 3, order - 1, rotation_angle + random_rotation)
+        right(120)
+        
+        color(random.choice(['cyan', 'lime', 'magenta', 'red', 'yellow']))
+        blip_line(random_length / 3, order - 1, rotation_angle + random_rotation)
+        left(60)
+        
+        blip_line(random_length / 3, order - 1, rotation_angle + random_rotation)
+
+# Draw the Koch snowflake with randomized rotation and length
+def koch_snowflake(length, order):
+    rotation_angle = random.randint(5, 15)  # Start with a random rotation angle
+    for _ in range(3):
+        blip_line(length, order, rotation_angle)
+        right(120)
+        right(rotation_angle)  # Apply additional random rotation
+
+# Set up the turtle
+initializeTurtle()
+#shrinking canvas width and height
+canvas_width = 500
+canvas_height = 500
+initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+bgcolor("black")
+showturtle()
+
+# Set up drawing
+jump(100, 300)  # Start position
+face(0)
+
+# Define initial color for the first side
+color('lime')
+
+# Draw the snowflake
+length = 200  # Smaller size for better fit
+order = 3  
+koch_snowflake(length, order)
+
+show()
+
+ </p>
+ </p>
+
+		Experimental Code Set 2C: Stretch Mirror Image
+		-This stretched out the fractal and created a mirror image.
+		-The length was dropped to 200 and the start placement was adjusted to 100x500
+		-Three set colors were chosen and cycled through using a set order for each segment after a turn.
+		-A little over half the snowflake pattern is drawn before it restarts.
+		-The partial/slightly over half snowflakes are connected.
+		-The pattern looks like a set of crowns.
+
+		See Image:
+		<img src="https://github.com/Zboyan/labreports/blob/main/picture13.png" alt="See the Image" />
+		
+		See code below:
+		
+#Experimental Code Set 2C: I mirrored the fractal with a 3 color pattern
+# Define the blip_line function (Koch curve) with mirroring
+def blip_line(length, order):
+    if order == 0:
+        forward(length)
+    else:
+        # Color for first segment (cyan)
+        color('cyan')
+        blip_line(length / 3, order - 1)
+        left(60)
+        
+        # Color for second segment (lime)
+        color('lime')
+        blip_line(length / 3, order - 1)
+        right(120)
+        
+        # Color for third segment (magenta)
+        color('magenta')
+        blip_line(length / 3, order - 1)
+        left(60)
+        
+        # Continue with the next segment (color applied already)
+        blip_line(length / 3, order - 1)
+
+# Set up the turtle
+initializeTurtle()
+bgcolor('black')  # Set background color to black
+showturtle()
+
+# Set up drawing
+jump(100, 500)  # Start position
+face(0)
+
+# Draw the snowflake
+length = 200
+order = 3
+koch_snowflake(length, order)
+
+show()
+		
+ </p>
+ </p>
+
+		Sample Code Set 3: Dragon Curve
+		-The dragon curve is a famous fractal known for its self similar structure.
+		-Each segment breaks twice with alternating turn direction at 90 degrees to create the zigzag pattern.
+		-The length scales down by 1/sqrt of 2 to maintain the shape.
+		-A purple color is used for visibility, order 10 creates more recursion.
+		-The curve is unique in that it never crosses itself even though it is complex and mesmerizing.
+
+		See Image:
+		<img src="https://github.com/Zboyan/labreports/blob/main/picture10.png" alt="See the Image" />
+		
+		See code below:
+		
+#Sample Code Set 3 (what you gave us)
+# Define the dragon curve function
+def dragon_curve(order, length, turn_direction):
+    # Base case: if order is 0, just move forward
+    if order == 0:
+        forward(length)
+    else:
+        # Calculate the new length for each recursive step
+        new_length = length / (2 ** 0.5)
+
+        # Recursively draw the dragon curve, turning right and left as needed
+        dragon_curve(order - 1, new_length, 1)  # First segment
+        right(turn_direction * 90)             # Turn by 90 degrees
+        dragon_curve(order - 1, new_length, -1) # Second segment
+
+# Initialize the turtle for drawing
+initializeTurtle()
+
+# Move the turtle to a starting position
+jump(400, 400)
+face(0)             # Set starting direction
+color('purple')     # Choose a color
+
+# Draw the dragon curve
+order = 10          # Complexity level
+length = 300        # Initial length of each segment
+dragon_curve(order, length, 1)
+
+# Show the final drawing
+show()
+
+</p>
+</p>
+
+		Experimental Code Set 3: Smudging the curve
+		-The background is black.
+		-A randomized turning angle between 60 and 120 degrees in introduced. 
+		-The standard dragon curve structure is broken, which causes segments to overlap at times and smudge.
+		-1 random color out of a set of 5 colors is chosen for the entire drawing.
+		-The order is increased to 15 which increases the recursion and overlap. 
+		-The result is a compact smudged shape.
+
+		See Image:
+		<img src="https://github.com/Zboyan/labreports/blob/main/picture14.png" alt="See the Image" />
+		
+		See code below:
+		
+#Experimental Code Set 3 (makes a "smudge" in a random color chosen from 5)
+import random
+def dragon_curve(order, length, turn_direction):
+    if order == 0:
+        forward(length)
+    else:
+        new_length = length / (2 ** 0.5)
+        dragon_curve(order - 1, new_length, 1)
+        right(random.randint(60, 120))  # Random turn between 60° and 120°
+        #this helps helps cause the smudge
+        dragon_curve(order - 1, new_length, -1)
+
+# Initialize the turtle for drawing
+initializeTurtle()
+#shrunk canvas size
+canvas_width = 500
+canvas_height = 500
+initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+bgcolor('black')  # Set background color to black
+
+# Move the turtle to a starting position
+jump(200, 200)
+face(0)             # Set starting direction
+color(random.choice(['cyan', 'lime', 'magenta', 'red', 'yellow']))     
+# Choose a random color out of 5 options
+
+# Draw the dragon curve
+order = 15        # order increased to 15 helps cause the smudge
+length = 500        # Initial length of each segment
+dragon_curve(order, length, 1)
+
+show()
+
+</p>
+</p>
+
+		Experimental Code Set 3B: Massive Smudge
+		-The background is black.
+		-Multiple layers occur in the smudge.
+		-For each layer, the color changes from a set of 5 colors.
+		-The first layer has the highest order of 12 and it the most complex.
+		-Each layer after gets simplier as lower recursion means more spread out.
+		-The start position shifts after each layer.
+
+		See Images:
+		<img src="https://github.com/Zboyan/labreports/blob/main/picture15.png" alt="See the Image" />
+		<img src="https://github.com/Zboyan/labreports/blob/main/picture15b.png" alt="See the Image" />
+		
+		See code below:
+
+#Experimental Code Set 3B (makes a massive "smudge" in a random colors chosen from 5)
+# Draw multiple layers with each having a change in color
+for i in range(5):
+    jump(200 + i * 20, 200 + i * 20)
+    color(random.choice(['cyan', 'lime', 'magenta', 'red', 'yellow']))  # Random color for each layer
+    dragon_curve(12 - i, length, 1)
+
+show()
+
       </section>
 
       <!-- RESULTS & ANALYSIS SECTION -->
