@@ -18,8 +18,8 @@
   <header>
     <h1>Fractal Geometry Lab Report</h1>
     <p class="author">
-      [Your Name] <br />
-      [Date]
+     Courteney Zboyan <br />
+     2/14/25
     </p>
   </header>
   
@@ -51,22 +51,6 @@
 	<!-- -------------------------------------------------------------------------------------------- -->
 	<section id="code">
 	<pre><code class="language-python">
-	# This is just a sample Python code block
-	# demonstrating how code might be displayed.
-
-	import numpy as np
-	import matplotlib.pyplot as plt
-
-	x = np.linspace(-10, 10, 100)
-	y = 2*x + 5
-
-	plt.plot(x, y)
-	plt.title("Sample Plot")
-	plt.show()
-	</code></pre>
-
-
-
 
 
 
@@ -82,10 +66,101 @@
       
         <h2>Results &amp; Analysis</h2>
         <p>
-          In this placeholder section, you might describe observations,
-          results, or insights gained from any analysis. You can incorporate 
-          references to equations (e.g., $y = mx + b$) or embed images and 
-          other visual aids to illustrate your points.
+
+#Install the key file:
+-The code lines below install a custom file for python.
+		
+         !wget -O turtle_setup.py 'https://raw.githubusercontent.com/williamedwardhahn/fractal25/refs/heads/main/turtle_setup.py'
+from turtle_setup import *
+
+		//
+#Sample Code 1: Draw equilateral Triangle
+-The code below draws a green equilaterial triangle. 
+-The drawing starts at 300x500 and draws each side with 400 length.
+-The turtle is facing up to start and 120 degree left turns are made.
+		
+initializeTurtle()
+showturtle()
+
+# Define the function to draw an equilateral triangle
+def draw_triangle(length):
+    for _ in range(3):
+        forward(length)
+        left(120)
+
+# Set up the turtle
+jump(300, 500)
+face(90)
+color('green')
+length = 400
+draw_triangle(length)
+
+show()
+
+		//
+#Experimental Code: Draw green triangle and fill with yellow
+-The begin_fill and end_fill functions fill in the triangle with default color of yellow
+
+initializeTurtle()
+showturtle()
+
+# Define the function to draw and fill an equilateral triangle
+def draw_triangle(length):
+    begin_fill()  # Start filling
+    for _ in range(3):
+        forward(length)
+        left(120)
+    end_fill()  # End filling
+
+# Set up the turtle
+jump(300, 500)
+face(90)
+color('green')
+length = 400
+
+draw_triangle(length)  # Draw and fill the triangle
+
+show()
+
+		//
+#Experimental Code#2: Draw lime triangle, thick borders,filled in
+-canvas dimensions shrunk
+-background color is now black
+-altered start to fit
+-border width is 20
+-side length is 100
+-faces down and turns right 120 degrees
+-border is lime and fill is yellow
+
+canvas_width = 500
+canvas_height = 400
+initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+
+showturtle()
+
+# Define the function to draw and fill an equilateral triangle
+def draw_triangle(length):
+    begin_fill()  # Start filling
+    for _ in range(3):
+        forward(length)
+        right(120)
+    end_fill()  # End filling
+
+# Set up the turtle
+bgcolor("black")
+jump(200, 200)
+face(270)
+color('lime')
+width(20)
+length = 100
+
+
+draw_triangle(length)  # Draw and fill the triangle
+
+show()
+
+
+		
         </p>
 
 
