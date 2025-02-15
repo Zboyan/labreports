@@ -158,7 +158,51 @@ length = 100
 draw_triangle(length)  # Draw and fill the triangle
 
 show()
+		//
+#Experimental Code#3: Spiral of Triangles:
+-a colorful sprial of triangles is created.
+-each has a different border color and fill color from a predetermined set a random colors
+-the canvas width is reduced to 500x400 with the drawing centered on 200x200 on black background
+-20 triangles are produced with side length 100 and border width 5
+-after a triangle is drawn, the turtle is rotated 18 degrees to cause slight displacement
 
+import random
+
+canvas_width = 500
+canvas_height = 400
+initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+
+showturtle()
+bgcolor("black")  # Set background color to black
+jump(200,200)  # Center the spiral
+face(270)  # Start facing downward
+
+# Function to draw and fill an equilateral triangle
+def draw_triangle(length):
+    begin_fill()  # Start filling
+    for _ in range(3):
+        forward(length)
+        right(120)
+    end_fill()  # End filling
+
+# Create a spiral with random colors
+length = 100
+num_triangles = 20  # Adjust for more/less triangles
+angle_step = 18  # Rotation per step
+
+for i in range(num_triangles):
+    # Generate random outline and fill colors
+    outline_color = random.choice(['red', 'blue', 'green', 'purple', 'cyan', 'magenta', 'white', 'orange'])
+    fill_color = random.choice(['yellow', 'white', 'orange', 'pink', 'lightblue', 'lime'])
+    
+    color(outline_color)  # Set outline color
+    fillcolor(fill_color)  # Set fill color
+    width(5)  # Thicker border for visibility
+    
+    draw_triangle(length)  # Draw the triangle
+    right(angle_step)  # Rotate to create the spiral effect
+
+show()
 
 		
         </p>
