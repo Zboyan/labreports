@@ -67,14 +67,14 @@
         <h2>Results &amp; Analysis</h2>
         <p>
 
-#Install the key file:
+Install the key file:
 -The code lines below install a custom file for python.
 		
          !wget -O turtle_setup.py 'https://raw.githubusercontent.com/williamedwardhahn/fractal25/refs/heads/main/turtle_setup.py'
 from turtle_setup import *
 
 		//
-#Sample Code 1: Draw equilateral Triangle
+Sample Code 1: Draw equilateral Triangle
 -The code below draws a green equilaterial triangle. 
 -The drawing starts at 300x500 and draws each side with 400 length.
 -The turtle is facing up to start and 120 degree left turns are made.
@@ -98,7 +98,7 @@ draw_triangle(length)
 show()
 
 		//
-#Experimental Code: Draw green triangle and fill with yellow
+Experimental Code #1A: Draw green triangle and fill with yellow
 -The begin_fill and end_fill functions fill in the triangle with default color of yellow
 
 initializeTurtle()
@@ -123,7 +123,7 @@ draw_triangle(length)  # Draw and fill the triangle
 show()
 
 		//
-#Experimental Code#2: Draw lime triangle, thick borders,filled in
+Experimental Code#1B: Draw lime triangle, thick borders,filled in
 -canvas dimensions shrunk
 -background color is now black
 -altered start to fit
@@ -159,7 +159,7 @@ draw_triangle(length)  # Draw and fill the triangle
 
 show()
 		//
-#Experimental Code#3: Spiral of Triangles:
+Experimental Code#1C: Spiral of Triangles:
 -a colorful sprial of triangles is created.
 -each has a different border color and fill color from a predetermined set a random colors
 -the canvas width is reduced to 500x400 with the drawing centered on 200x200 on black background
@@ -204,7 +204,7 @@ for i in range(num_triangles):
 
 show()
 		//
-#Sample Code 2: draw famous recursive Sierpinski Triangle
+Sample Code 2: draw famous recursive Sierpinski Triangle
 -this fractal involves drawing an equilateral triangle and recursively subdividing it
 -the function is defined with length of side and order of recursion
 -if the order is 0, a single triangle is drawn
@@ -244,7 +244,7 @@ sierpinski_triangle(length, order)
 
 show()
 		//
-#Experimental Code Set 2:
+Experimental Code Set 2:
 -a black blackground and new center 200x300 are set
 -a higher order of recrusion 5 and shorter length of 250 are set
 -the main triangle is blue, with the smallest triangles filled with a random color from a predetermined set.
@@ -288,7 +288,7 @@ sierpinski_triangle(length, order)
 
 show()
 		//
-#Sample Code Set 3: Cellular Automata
+Sample Code Set 3: Cellular Automata
 -1D Cellular Automata is created and displayed in a binary pattern
 -0 means black and 1 means white
 -fractals are produced based on something called Wolfram rules 
@@ -296,9 +296,13 @@ show()
 -a grid function is defined
 -a 100x100 grid is initialized with everything being black (using 0's)
 -the first row's center cell [0,50] is set to white (using a 1)
--Wolfram rule 90 is defined as an 8-bit to print the siepinski triangle
-
-		,continued.
+-Wolfram rule 90 is defined as an 8-bit to print the sierpinski triangle
+-Rule 90 is then encoded for different neighborhood states in a 3D array with binary rules
+-a function is then defined to apply cellular automata rules
+-the function applies the rules based on the 3 cells (Northwest, North, and Northeast) above the current cell
+-a redefinement is needed since "rule" is not an array, but binary mask, although it is not apparently used other than that
+-the example of rule 90, sierpinski triangle, is displayed.
+-more examples of different rules are displayed: 30, 62, 110, and 126
 
 		
 import numpy as np
@@ -359,6 +363,48 @@ plot(CA(C))
 
 for rule in [30, 62, 90, 110, 126]:
     plot(CA(C))
+		//
+Experimental Code #3: a color change
+-
+-
+-
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def plot(x, cmap='plasma'):  # Use a colorful colormap
+    fig, ax = plt.subplots()
+    im = ax.imshow(x, cmap=cmap)  
+    ax.axis('off')
+    fig.set_size_inches(10, 10)
+    plt.show()
+
+def CA(X, rule):
+    """Cellular Automaton using rule-based bitwise operations."""
+    rule = np.uint8(rule)  # Convert rule to 8-bit integer
+    rows, cols = X.shape
+    for i in range(1, rows - 1):  
+        neighborhood = (
+            4 * X[i - 1, :-2] +  
+            2 * X[i - 1, 1:-1] +  
+            X[i - 1, 2:]  
+        )
+        X[i, 1:-1] = (rule >> neighborhood) & 1  # Apply rule using bitwise shift
+    return X
+
+# Set up a grid
+C = np.zeros((100, 100), dtype=np.uint8)  # Ensure it's uint8 for bitwise ops
+C[0, 50] = 1  # Set initial state
+
+# Apply different rules with colors
+for rule in [30, 62, 90, 110, 126]:
+    plot(CA(C.copy(), rule), cmap='inferno')  # Use a colorful colormap
+		//
+Experimental Code #3B: Game of Life
+-
+-
+-
+
 
 
 		
