@@ -203,6 +203,91 @@ for i in range(num_triangles):
     right(angle_step)  # Rotate to create the spiral effect
 
 show()
+		//
+#Sample Code 2: draw famous recursive Sierpinski Triangle
+-this fractal involves drawing an equilateral triangle and recursively subdividing it
+-the function is defined with length of side and order of recursion
+-if the order is 0, a single triangle is drawn
+-if else, higher order, the triangle is split into 3 smaller triangles
+-the drawing is set to be displayed, centered at 300x500, starts upward, and drawn in green
+-the side length is 400 with order of recursion 4
+		
+# Define the recursive Sierpinski triangle function
+def sierpinski_triangle(length, order):
+    if order == 0:
+        draw_triangle(length)
+    else:
+        sierpinski_triangle(length / 2, order - 1)
+        forward(length / 2)
+        sierpinski_triangle(length / 2, order - 1)
+        backward(length / 2)
+        left(60)
+        forward(length / 2)
+        right(60)
+        sierpinski_triangle(length / 2, order - 1)
+        left(60)
+        backward(length / 2)
+        right(60)
+
+initializeTurtle()
+showturtle()
+
+# Set up the turtle
+jump(300, 500)
+face(90)
+color('green')
+
+# Draw the Sierpinski triangle
+length = 400
+order = 4
+sierpinski_triangle(length, order)
+
+show()
+		//
+#Experimental Code Set 2:
+-a black blackground and new center 200x300 are set
+-a higher order of recrusion 5 and shorter length of 250 are set
+-the main triangle is blue, with the smallest triangles filled with a random color from a predetermined set.
+		
+import random
+
+# Define the recursive Sierpinski triangle function
+def sierpinski_triangle(length, order):
+    if order == 0:
+        fillcolor(random.choice(['red', 'blue', 'green', 'purple', 'cyan', 'magenta', 'white', 'orange', 'yellow']))
+        begin_fill()
+        draw_triangle(length)
+        end_fill()
+    else:
+        sierpinski_triangle(length / 2, order - 1)
+        forward(length / 2)
+        sierpinski_triangle(length / 2, order - 1)
+        backward(length / 2)
+        left(60)
+        forward(length / 2)
+        right(60)
+        sierpinski_triangle(length / 2, order - 1)
+        left(60)
+        backward(length / 2)
+        right(60)
+
+# Initialize turtle settings
+canvas_width = 500
+canvas_height = 400
+initializeTurtle(initial_window_size=(canvas_width, canvas_height), mode='auto')
+
+showturtle()
+bgcolor("black")  # Set background to black
+jump(200, 300)  # Adjust position for better centering
+face(90)  # Face upwards
+
+# Draw the Sierpinski triangle with randomized colors
+length = 250  # Smaller length for better fit
+order = 5  # Increased recursion depth
+sierpinski_triangle(length, order)
+
+show()
+
 
 		
         </p>
