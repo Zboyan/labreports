@@ -36,10 +36,16 @@
       <section id="introduction">
         <h2>Introduction</h2>
         <p>
-          This is a sample introduction showcasing how you might structure 
-          your opening section. Replace this paragraph with a concise 
-          overview of the topic or project you are addressing. You can then 
-          expand the explanation as needed.
+         This Module 3 features the Sierpinski Triangle and Wolfram Rules. A brief intro is presented before coding examples of both.
+		The Sierpinski Triangle is a famous fractal that is self - similar. It can be developed using Rule 90 of the Wolfram Rules or with Geometric recursion.
+		Use of Rule 90 relies on having a grid while Geometric recursion is more free-form.
+		The Sierpinski Triangle is an equilateral triangle with smaller and smaller copies inside itself based on the order of recursion.
+		The Wolfram Rules are cellular automata rules developed by Stephen Wolfram in the 1980's. 
+		They are 1D rules where each cell has a state of either alive (1) or dead (0) where the next possible state of the cell is determined by it's immediate neighbors.
+		The left, center, and right determine the state. Since there are 3 positions and 2 states, then there are 2^3 = 8 possible combinations.
+		A rule number from 0 to 255 (there are 256 rules in total), then determines the next state of the cell. This number is converted into 8-bit binary and sets the neighborhood pattern.
+		There are a few different well-known rules such as Rule 30 (chaotic behavior), Rule 90 (Sierpinski Triangle), and Rule 110 (Turing Complete).
+		These rules can simulate complex systems simply, model natural occurences like fractals, and create prodecural patterns like those that occur in cryptography.
         </p>
       </section>
 
@@ -606,8 +612,10 @@ game_of_life(initial_grid, steps=10)
       <section id="conclusion">
         <h2>Conclusion</h2>
         <p>
-          In this sample conclusion, we highlight how the iterative approach to generating fractals reveals the vast complexity inherent in seemingly simple equations. Through our Python implementation, we observed that small parameter changes can produce markedly different fractal patterns, underscoring the Mandelbrot set's boundless intricacy. Our visualizations not only confirm the self-similarity and infinite resolution of the set, but also underscore the crucial role of computational optimizations in making high-resolution explorations feasible. Ultimately, this lab demonstrates that fractal geometry, far from being mere mathematical curiosities, provides deep insights into pattern formation and complexity in both pure mathematics and broader scientific contexts. 
-        </p>
+         This Module explored both the Sierpinski Triangle and Wolfram Rules. 
+		The Sierpinski Triangle was generated both recursively and using Wolfram Rule 90. 
+		Other Wolfram Rules and applications were also explored. 
+		This module showed the powerful effects of recursion and Wolfram Rules.
       </section>
 
      
