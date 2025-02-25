@@ -4,55 +4,42 @@
 <!-- -------------------------------------------------------------------------------------------- -->
 <!-- -------------------------------------------------------------------------------------------- -->
 <html>
-<head> <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="stylesheet" href="https://latex.vercel.app/style.css" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"/><script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]}};</script>
-
 <title>Fractal Geometry Lab Report</title>
+  </head>
 
-</head>
-	
-<body id="top">
+  <body id="top">
+    <header>
+      <h1>Fractal Geometry Lab Report</h1>
+      <p class="author">
+        Courteney Zboyan <br />
+        2/1/25
+      </p>
+    </header>
 
+    <main>
+      <article class="indent-pars">
+        <!-- INTRODUCTION SECTION -->
+        <!-- -------------------------------------------------------------------------------------------- -->
+        <!-- -------------------------------------------------------------------------------------------- -->
+        <!-- -------------------------------------------------------------------------------------------- -->
+        <!-- -------------------------------------------------------------------------------------------- -->
+        <section id="introduction">
+          <h2>Introduction</h2>
+          <p>
+            Module 2
 
+            This lab report explores the Random Walk Function, the Koch Snowflake,
+            and the Dragon Curve. Sample code is provided and then experimental
+            code is made. What the code does will be outlined.
+          </p>
+        </section>
 
-
-  <header>
-    <h1>Fractal Geometry Lab Report</h1>
-    <p class="author">
-      Courteney Zboyan <br />
-      2/1/25
-    </p>
-  </header>
-  
-
-
-  <main>
-    <article class="indent-pars">
-      
-      <!-- INTRODUCTION SECTION -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <section id="introduction">
-        <h2>Introduction</h2>
-        <p>
-	Module 2
-
-		This lab report explores the Random Walk Function, the Koch Snowflake, and the Dragon Curve.
-		Sample code is provided and then experimental code is made.
-		What the code does will be outlined.
-		
-        </p>
-      </section>
-
-
-     
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<section id="code">
-	<pre><code class="language-python">
+        <!-- -------------------------------------------------------------------------------------------- -->
+        <!-- -------------------------------------------------------------------------------------------- -->
+        <!-- -------------------------------------------------------------------------------------------- -->
+        <!-- -------------------------------------------------------------------------------------------- -->
+        <section id="code">
+          <pre><code class="language-python">
 	
 		Sample Code Set #1: Random Walk Function
 		-This code imports a custom turtle library to use various turtle functions. 
@@ -65,8 +52,28 @@
 		-The result is then displayed. I ran the code twice, to verify the random-ness.
 
 		See Images:
-		<img src="https://github.com/Zboyan/labreports/blob/main/picture1.png" alt="See the Image" />
-		<img src="https://github.com/Zboyan/labreports/blob/main/picture2.png" alt="See the Image" />
+          </code></pre>
+
+          <figure>
+            <img
+              src="https://raw.githubusercontent.com/Zboyan/labreports/main/picture1.png"
+              alt="ADD AN IMAGE HERE"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
+          <figure>
+            <img
+              src="https://raw.githubusercontent.com/Zboyan/labreports/main/picture2.png"
+              alt="ADD AN IMAGE HERE"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
+
+          <pre><code class="language-python">
 		
 		See code below:
 
@@ -105,20 +112,27 @@ random_walk(steps, step_length)
 
 # Step 4: Display the result
 show()
-		
- </p>
- </p>
-		
-		Experimental Code Set 1A: Altering the Random Walk Code:
-		Some adjustments were made to the original code, namely:
-		-A black background 
-		-Use of a random vibrant color for each step, from a predetermined list of 8 colors
+          </code></pre>
 
-		See Image:
-		<img src="https://github.com/Zboyan/labreports/blob/main/picture3.png" alt="See the Image" />
-		
-		See code below:
+          <p>
+            Experimental Code Set 1A: Altering the Random Walk Code:
+            Some adjustments were made to the original code, namely:
+            -A black background 
+            -Use of a random vibrant color for each step, from a predetermined list of 8 colors
+          </p>
 
+          <p>See Image:</p>
+          <figure>
+            <img
+              src="https://raw.githubusercontent.com/Zboyan/labreports/main/picture3.png"
+              alt="ADD AN IMAGE HERE"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
+
+          <pre><code class="language-python">
 #Experimental Code Set 1A (black background, varying random vibrant colors)
 import random
 
@@ -152,22 +166,28 @@ random_walk(steps, step_length)
 
 # Step 4: Display the result with the goal of eye popping design
 show()		#This looks like an animal with a tail and short limbs!
+          </code></pre>
 
- </p>
- </p>
-		
-		Experimental Code Set 1B: More altering the Random Walk Code:
-		Some more adjustments were made to the previous code, namely:
-		-a reduced canvas size of 500x400
-		-adjusted start to 250x250
-		-increased steps to 2000 and decresed step length to 5
-		
+          <p>
+            Experimental Code Set 1B: More altering the Random Walk Code:
+            Some more adjustments were made to the previous code, namely:
+            -a reduced canvas size of 500x400
+            -adjusted start to 250x250
+            -increased steps to 2000 and decresed step length to 5
+          </p>
 
-		See Image:
-		<img src="https://github.com/Zboyan/labreports/blob/main/picture4.png" alt="See the Image" />
-		
-		See code below:
+          <p>See Image:</p>
+          <figure>
+            <img
+              src="https://raw.githubusercontent.com/Zboyan/labreports/main/picture4.png"
+              alt="ADD AN IMAGE HERE"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
 
+          <pre><code class="language-python">
 #Experimental Code Set 1B (more steps, smaller length)
 import random
 
@@ -202,20 +222,27 @@ random_walk(steps, step_length)
 
 # Step 4: Display the result with the goal of eye popping design that fit on a smaller canvas
 show()
-		
- </p>
- </p>
-		
-		Experimental Code Set 1C: More altering the Random Walk Code:
-		Some more adjustments were made to the previous code, namely:
-		-a varying step size from a random selection of 4 odd numbers: 3, 5, 7, or 9
-		-if/else loop to sometimes reflect the turtle motion, creating a mirrored pattern
+          </code></pre>
 
-		See Image:
-		<img src="https://github.com/Zboyan/labreports/blob/main/picture5.png" alt="See the Image" />
-		
-		See code below:
+          <p>
+            Experimental Code Set 1C: More altering the Random Walk Code:
+            Some more adjustments were made to the previous code, namely:
+            -a varying step size from a random selection of 4 odd numbers: 3, 5, 7, or 9
+            -if/else loop to sometimes reflect the turtle motion, creating a mirrored pattern
+          </p>
 
+          <p>See Image:</p>
+          <figure>
+            <img
+              src="https://raw.githubusercontent.com/Zboyan/labreports/main/picture5.png"
+              alt="ADD AN IMAGE HERE"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
+
+          <pre><code class="language-python">
 #Experimental Code Set 1C (varying step size)
 import random
 
@@ -257,22 +284,29 @@ random_walk(steps, step_lengths)
 
 # Step 4: Display the result with these new features
 show()
-		
- </p>
- </p>
-		
-		Sample Code Set 2: Building the Koch Snowflake piece by piece
-		-This code steadily builds the Koch Snowflake, one side or section at a time.
-		-First, the canvas is initialized
-		-The start is set at 50x400 and the turtle faces up (90 degrees).
-		-A blip/zig zag bump is then drawn in a horizontal line using a 60 CCW, 120 CW, 60 CCW degree rotation
-		-The result is shown
+          </code></pre>
 
-		See Image:
-		<img src="https://github.com/Zboyan/labreports/blob/main/picture6.png" alt="See the Image" />
-		
-		See code below:
+          <p>
+            Sample Code Set 2: Building the Koch Snowflake piece by piece
+            -This code steadily builds the Koch Snowflake, one side or section at a time.
+            -First, the canvas is initialized
+            -The start is set at 50x400 and the turtle faces up (90 degrees).
+            -A blip/zig zag bump is then drawn in a horizontal line using a 60 CCW, 120 CW, 60 CCW degree rotation
+            -The result is shown
+          </p>
 
+          <p>See Image:</p>
+          <figure>
+            <img
+              src="https://raw.githubusercontent.com/Zboyan/labreports/main/picture6.png"
+              alt="ADD AN IMAGE HERE"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
+
+          <pre><code class="language-python">
 #Sample Code Set #2 (what you gave us)
 initializeTurtle()
 showturtle()
@@ -290,24 +324,31 @@ left(60)
 forward(800 / 3)
 
 show()
+          </code></pre>
 
- </p>
- </p>
-		
-		Sample Code Set 2B: Building the Koch Snowflake piece by piece
-		-This code steadily builds the Koch Snowflake, one side or section at a time.
-		-Different orders of recursion are used.
-		-The red line is the line from before (2), it has order of recursion 1.
-		-A more advanced blip line is then drawn in blue above the red blip line.
-		-The blue line has nested zigzags/blips from its order of recursion 2.
-		-The result is shown
+          <p>
+            Sample Code Set 2B: Building the Koch Snowflake piece by piece
+            -This code steadily builds the Koch Snowflake, one side or section at a time.
+            -Different orders of recursion are used.
+            -The red line is the line from before (2), it has order of recursion 1.
+            -A more advanced blip line is then drawn in blue above the red blip line.
+            -The blue line has nested zigzags/blips from its order of recursion 2.
+            -The result is shown
+          </p>
 
-		See Image:
-		<img src="https://github.com/Zboyan/labreports/blob/main/picture7.png" alt="See the Image" />
-		
-		See code below:
+          <p>See Image:</p>
+          <figure>
+            <img
+              src="https://raw.githubusercontent.com/Zboyan/labreports/main/picture7.png"
+              alt="ADD AN IMAGE HERE"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
 
-#Sample Code Set #2B (what you gave us)
+          <pre><code class="language-python">
+#Sample Code Set 2B (what you gave us)
 # Define the blip_line function
 def blip_line(length, order):
     if order == 0:
@@ -335,22 +376,29 @@ color('blue')
 blip_line(800, 2)  # Order 2
 
 show()
+          </code></pre>
 
-</p>
-</p>
-		
-		Sample Code Set 2C: Building the Koch Snowflake piece by piece
-		-This code steadily builds the Koch Snowflake, one side or section at a time.
-		-A green blip line is produced with order of recursion 3. 
-		-This has more sets of nested blips than prior orders.
-		-As more orders are produced, the pattern gets closer the a Koch Snowflake.
-		-The result is shown
+          <p>
+            Sample Code Set 2C: Building the Koch Snowflake piece by piece
+            -This code steadily builds the Koch Snowflake, one side or section at a time.
+            -A green blip line is produced with order of recursion 3. 
+            -This has more sets of nested blips than prior orders.
+            -As more orders are produced, the pattern gets closer the a Koch Snowflake.
+            -The result is shown
+          </p>
 
-		See Image:
-		<img src="https://github.com/Zboyan/labreports/blob/main/picture8.png" alt="See the Image" />
-		
-		See code below:
-		
+          <p>See Image:</p>
+          <figure>
+            <img
+              src="https://raw.githubusercontent.com/Zboyan/labreports/main/picture8.png"
+              alt="ADD AN IMAGE HERE"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
+
+          <pre><code class="language-python">
 #Sample Code Set 2C (what you gave us)
 initializeTurtle()
 showturtle()
@@ -361,25 +409,32 @@ color('green')
 blip_line(800, 3)  # Order 3
 
 show()
+          </code></pre>
 
- </p>
- </p>
+          <p>
+            Sample Code Set 2D: The Complete Koch Snowflake
+            -The complete Koch Snowflake is drawn.
+            -The blipline function is used to draw this shape.
+            -If the order is 0, a straight line is drawn.
+            -Otherwise (else), the line is broken into four segments to create the zigzag.
+            -The segments are as follows straight line, 60 CCW, 120 CW, 60 CCW degree rotation.
+            -The function is called, or repeated, thrice.
+            -The shape is drawn with pixel length 400 and all in blue.
+            -The result is shown.
+          </p>
 
-		Sample Code Set 2D: The Complete Koch Snowflake
-		-The complete Koch Snowflake is drawn.
-		-The blipline function is used to draw this shape.
-		-If the order is 0, a straight line is drawn.
-		-Otherwise (else), the line is broken into four segments to create the zigzag.
-		-The segments are as follows straight line, 60 CCW, 120 CW, 60 CCW degree rotation.
-		-The function is called, or repeated, thrice.
-		-The shape is drawn with pixel length 400 and all in blue.
-		-The result is shown.
+          <p>See Image:</p>
+          <figure>
+            <img
+              src="https://raw.githubusercontent.com/Zboyan/labreports/main/picture9.png"
+              alt="ADD AN IMAGE HERE"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
 
-		See Image:
-		<img src="https://github.com/Zboyan/labreports/blob/main/picture9.png" alt="See the Image" />
-		
-		See code below:
-		
+          <pre><code class="language-python">
 #Sample Code Set 2D (what you gave us)
 initializeTurtle()
 showturtle()
@@ -414,20 +469,27 @@ order = 3
 koch_snowflake(length, order)
 
 show()
+          </code></pre>
 
- </p>
- </p>
+          <p>
+            Experimental Code Set 2: Broken Snowflake
+            -I adjusted the background color to black and line color to lime.
+            -A small rotation angle of 10 degrees is introduced which adds an extra rotation.
+            -This creates asymmetry and pinches the snowflake in on itself.
+          </p>
 
-		Experimental Code Set 2: Broken Snowflake
-		-I adjusted the background color to black and line color to lime.
-		-A small rotation angle of 10 degrees is introduced which adds an extra rotation.
-		-This creates asymmetry and pinches the snowflake in on itself.
+          <p>See Image:</p>
+          <figure>
+            <img
+              src="https://raw.githubusercontent.com/Zboyan/labreports/main/picture11.png"
+              alt="ADD AN IMAGE HERE"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
 
-		See Image:
-		<img src="https://github.com/Zboyan/labreports/blob/main/picture11.png" alt="See the Image" />
-		
-		See code below:
-		
+          <pre><code class="language-python">
 #Experimental Code Set 2: I "broke" the snowflake a bit
 initializeTurtle()
 showturtle()
@@ -468,23 +530,30 @@ order = 3
 koch_snowflake(length, order)
 
 show()
+          </code></pre>
 
- </p>
- </p>
+          <p>
+            Experimental Code Set 2B: Further Broken
+            -The Snowflake became even more distorted with this code.
+            -A random rotation angle of 30 degrees CCW to 30 degrees CW was introduced 
+            -A random length of each segment of 0.8 to 1.2 was introduced.
+            -A random color choice from 5 colors was introduced.
+            -A smaller canvas was applied.
+            -The snowfalke appears distorted due to varying angles, colors, and lengths.
+          </p>
 
-		Experimental Code Set 2B: Further Broken
-		-The Snowflake became even more distorted with this code.
-		-A random rotation angle of 30 degrees CCW to 30 degrees CW was introduced 
-		-A random length of each segment of 0.8 to 1.2 was introduced.
-		-A random color choice from 5 colors was introduced.
-		-A smaller canvas was applied.
-		-The snowfalke appears distorted due to varying angles, colors, and lengths.
+          <p>See Image:</p>
+          <figure>
+            <img
+              src="https://raw.githubusercontent.com/Zboyan/labreports/main/picture12.png"
+              alt="ADD AN IMAGE HERE"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
 
-		See Image:
-		<img src="https://github.com/Zboyan/labreports/blob/main/picture12.png" alt="See the Image" />
-		
-		See code below:
-		
+          <pre><code class="language-python">
 #Experimental Code Set 2B: I "broke" the snowflake more + randomized colors and angles
 import random
 
@@ -542,23 +611,30 @@ order = 3
 koch_snowflake(length, order)
 
 show()
+          </code></pre>
 
- </p>
- </p>
+          <p>
+            Experimental Code Set 2C: Stretch Mirror Image
+            -This stretched out the fractal and created a mirror image.
+            -The length was dropped to 200 and the start placement was adjusted to 100x500
+            -Three set colors were chosen and cycled through using a set order for each segment after a turn.
+            -A little over half the snowflake pattern is drawn before it restarts.
+            -The partial/slightly over half snowflakes are connected.
+            -The pattern looks like a set of crowns.
+          </p>
 
-		Experimental Code Set 2C: Stretch Mirror Image
-		-This stretched out the fractal and created a mirror image.
-		-The length was dropped to 200 and the start placement was adjusted to 100x500
-		-Three set colors were chosen and cycled through using a set order for each segment after a turn.
-		-A little over half the snowflake pattern is drawn before it restarts.
-		-The partial/slightly over half snowflakes are connected.
-		-The pattern looks like a set of crowns.
+          <p>See Image:</p>
+          <figure>
+            <img
+              src="https://raw.githubusercontent.com/Zboyan/labreports/main/picture13.png"
+              alt="ADD AN IMAGE HERE"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
 
-		See Image:
-		<img src="https://github.com/Zboyan/labreports/blob/main/picture13.png" alt="See the Image" />
-		
-		See code below:
-		
+          <pre><code class="language-python">
 #Experimental Code Set 2C: I mirrored the fractal with a 3 color pattern
 # Define the blip_line function (Koch curve) with mirroring
 def blip_line(length, order):
@@ -598,22 +674,29 @@ order = 3
 koch_snowflake(length, order)
 
 show()
-		
- </p>
- </p>
+          </code></pre>
 
-		Sample Code Set 3: Dragon Curve
-		-The dragon curve is a famous fractal known for its self similar structure.
-		-Each segment breaks twice with alternating turn direction at 90 degrees to create the zigzag pattern.
-		-The length scales down by 1/sqrt of 2 to maintain the shape.
-		-A purple color is used for visibility, order 10 creates more recursion.
-		-The curve is unique in that it never crosses itself even though it is complex and mesmerizing.
+          <p>
+            Sample Code Set 3: Dragon Curve
+            -The dragon curve is a famous fractal known for its self similar structure.
+            -Each segment breaks twice with alternating turn direction at 90 degrees to create the zigzag pattern.
+            -The length scales down by 1/sqrt of 2 to maintain the shape.
+            -A purple color is used for visibility, order 10 creates more recursion.
+            -The curve is unique in that it never crosses itself even though it is complex and mesmerizing.
+          </p>
 
-		See Image:
-		<img src="https://github.com/Zboyan/labreports/blob/main/picture10.png" alt="See the Image" />
-		
-		See code below:
-		
+          <p>See Image:</p>
+          <figure>
+            <img
+              src="https://raw.githubusercontent.com/Zboyan/labreports/main/picture10.png"
+              alt="ADD AN IMAGE HERE"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
+
+          <pre><code class="language-python">
 #Sample Code Set 3 (what you gave us)
 # Define the dragon curve function
 def dragon_curve(order, length, turn_direction):
@@ -644,23 +727,30 @@ dragon_curve(order, length, 1)
 
 # Show the final drawing
 show()
+          </code></pre>
 
-</p>
-</p>
+          <p>
+            Experimental Code Set 3: Smudging the curve
+            -The background is black.
+            -A randomized turning angle between 60 and 120 degrees in introduced. 
+            -The standard dragon curve structure is broken, which causes segments to overlap at times and smudge.
+            -1 random color out of a set of 5 colors is chosen for the entire drawing.
+            -The order is increased to 15 which increases the recursion and overlap. 
+            -The result is a compact smudged shape.
+          </p>
 
-		Experimental Code Set 3: Smudging the curve
-		-The background is black.
-		-A randomized turning angle between 60 and 120 degrees in introduced. 
-		-The standard dragon curve structure is broken, which causes segments to overlap at times and smudge.
-		-1 random color out of a set of 5 colors is chosen for the entire drawing.
-		-The order is increased to 15 which increases the recursion and overlap. 
-		-The result is a compact smudged shape.
+          <p>See Image:</p>
+          <figure>
+            <img
+              src="https://raw.githubusercontent.com/Zboyan/labreports/main/picture14.png"
+              alt="ADD AN IMAGE HERE"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
 
-		See Image:
-		<img src="https://github.com/Zboyan/labreports/blob/main/picture14.png" alt="See the Image" />
-		
-		See code below:
-		
+          <pre><code class="language-python">
 #Experimental Code Set 3 (makes a "smudge" in a random color chosen from 5)
 import random
 def dragon_curve(order, length, turn_direction):
@@ -693,24 +783,39 @@ length = 500        # Initial length of each segment
 dragon_curve(order, length, 1)
 
 show()
+          </code></pre>
 
-</p>
-</p>
+          <p>
+            Experimental Code Set 3B: Massive Smudge
+            -The background is black.
+            -Multiple layers occur in the smudge.
+            -For each layer, the color changes from a set of 5 colors.
+            -The first layer has the highest order of 12 and it the most complex.
+            -Each layer after gets simplier as lower recursion means more spread out.
+            -The start position shifts after each layer.
+          </p>
 
-		Experimental Code Set 3B: Massive Smudge
-		-The background is black.
-		-Multiple layers occur in the smudge.
-		-For each layer, the color changes from a set of 5 colors.
-		-The first layer has the highest order of 12 and it the most complex.
-		-Each layer after gets simplier as lower recursion means more spread out.
-		-The start position shifts after each layer.
+          <p>See Images:</p>
+          <figure>
+            <img
+              src="https://raw.githubusercontent.com/Zboyan/labreports/main/picture15.png"
+              alt="ADD AN IMAGE HERE"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
+          <figure>
+            <img
+              src="https://raw.githubusercontent.com/Zboyan/labreports/main/picture15b.png"
+              alt="ADD AN IMAGE HERE"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
 
-		See Images:
-		<img src="https://github.com/Zboyan/labreports/blob/main/picture15.png" alt="See the Image" />
-		<img src="https://github.com/Zboyan/labreports/blob/main/picture15b.png" alt="See the Image" />
-		
-		See code below:
-
+          <pre><code class="language-python">
 #Experimental Code Set 3B (makes a massive "smudge" in a random colors chosen from 5)
 # Draw multiple layers with each having a change in color
 for i in range(5):
@@ -719,20 +824,28 @@ for i in range(5):
     dragon_curve(12 - i, length, 1)
 
 show()
+          </code></pre>
 
-</p>
-</p>
-		Final Code Set: Drew both Snowflake and Dragon in random colors
-		-Presented both fractals in one screen with each a random color from a choice of 5 colors. 
-		-Dragon on the left and Snowflake on the right in a black background.
-		-The start points are adjusted so they do not overlap.
-		-It is neat to see both together to compare and contrast.
+          <p>
+            Final Code Set: Drew both Snowflake and Dragon in random colors
+            -Presented both fractals in one screen with each a random color from a choice of 5 colors. 
+            -Dragon on the left and Snowflake on the right in a black background.
+            -The start points are adjusted so they do not overlap.
+            -It is neat to see both together to compare and contrast.
+          </p>
 
-		See Image:
-		<img src="https://github.com/Zboyan/labreports/blob/main/picture16.png" alt="See the Image" />
-		
-		See code below:
+          <p>See Image:</p>
+          <figure>
+            <img
+              src="https://raw.githubusercontent.com/Zboyan/labreports/main/picture16.png"
+              alt="ADD AN IMAGE HERE"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
 
+          <pre><code class="language-python">
 #Displays a Dragon curve and Koch snowflake in random colors on left and right side on screen
 import random
 
@@ -786,67 +899,58 @@ for _ in range(3):
 
 # Show Final Drawing
 show()
+          </code></pre>
+        </section>
 
-</p>
-</p>
-		
-      </section>
+        <!-- RESULTS & ANALYSIS SECTION -->
+        <!-- -------------------------------------------------------------------------------------------- -->
+        <!-- -------------------------------------------------------------------------------------------- -->
+        <!-- -------------------------------------------------------------------------------------------- -->
+        <!-- -------------------------------------------------------------------------------------------- -->
+        <section id="results">
+          <h2>Results &amp; Analysis</h2>
+          <p>
+            Summary from the TED talk: 
+            "He prefers “roughness.” It fits better.
+            Talks about a Cauliflower and repeated cutting if it.
+            D is a practical measure of roughness. Space-filling area. 
+            D = roughness, a parameter that is often calculated off of fractal shapes or shapes that did not exist even in nature. 
+            An example is the Peano curve. In a snowflake, drawing “Mandelbrot curves” makes the shape seem more natural. 
+            Fractals have applications in Finance such as stock charts. 
+            Fractals also help refine bell curves. 
+            He concluded the talk about the Mandelbrot Set and it’s simple z = z^2 + c equation. 
+            The shape is emphasized with different colors or patterns around it."
+          </p>
 
-      <!-- RESULTS & ANALYSIS SECTION -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <section id="results">
-      
-      
-        <h2>Results &amp; Analysis</h2>
-        <p>
-          Summary from the TED talk: 
-		"He prefers “roughness.” It fits better.
-		Talks about a Cauliflower and repeated cutting if it.
-		D is a practical measure of roughness. Space-filling area. 
-		D = roughness, a parameter that is often calculated off of fractal shapes or shapes that did not exist even in nature. 
-		An example is the Peano curve. In a snowflake, drawing “Mandelbrot curves” makes the shape seem more natural. 
-		Fractals have applications in Finance such as stock charts. 
-		Fractals also help refine bell curves. 
-		He concluded the talk about the Mandelbrot Set and it’s simple z = z^2 + c equation. 
-		The shape is emphasized with different colors or patterns around it."
+          <p>
+            Comparing the Snowflake and the Dragon. 
+            The Snowflake starts with an equilaterial triangle while the Dragon starts with a line.
+            The Snowflake is self-similar while the Dragon is self-intersecting.
+            The Snowflake has smooth transitions while the Dragon has intersecting ones.
+            The Snowflake is symmetric while the Dragon is not.
+            The Snowflake does not fill a 2D space like the Dragon does.
+            The Snowflake has a predictable shape while the Dragon does not.
+          </p>
+        </section>
 
-        </p>
+        <!-- CONCLUSION SECTION -->
+        <!-- -------------------------------------------------------------------------------------------- -->
+        <!-- -------------------------------------------------------------------------------------------- -->
+        <!-- -------------------------------------------------------------------------------------------- -->
+        <!-- -------------------------------------------------------------------------------------------- -->
+        <section id="conclusion">
+          <h2>Conclusion</h2>
+          <p>
+            This conclusion emphasizes how the iterative process of fractal generation unveils the complexity hidden within.  
+            With even slight parameter adjustments, unique fractal patterns were created.  
+            The designs show the theory behind fractals such as the Mandelbrot Set, Koch Snowflake, and Dragon Curve along with the power of coding.
+            Thus, fractals have many application across fields.
+          </p>
+        </section>
+      </article>
+    </main>
 
-	Comparing the Snowflake and the Dragon. 
-	      The Snowflake starts with an equilaterial triangle while the Dragon starts with a line.
-	      The Snowflake is self-similar while the Dragon is self-intersecting.
-	      The Snowflake has smooth transitions while the Dragon has intersecting ones.
-	      The Snowflake is symmetric while the Dragon is not.
-	      The Snowflake does not fill a 2D space like the Dragon does.
-	      The Snowflake has a predictable shape while the Dragon does not.
-
-
-      </section>
-
-
-
-      <!-- CONCLUSION SECTION -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <section id="conclusion">
-        <h2>Conclusion</h2>
-        <p>
-          This conclusion emphasizes how the iterative process of fractal generation unveils the complexity hidden within.  
-		With even slight parameter adjustments, unique fractal patterns were created.  
-		The designs show the theory behind fractals such as the Mandelbrot Set, Koch Snowflake, and Dragon Curve along with the power of coding.
-		Thus, fractals have many application across fields.
-      </section>
-
-     
-
-     
-  </main>
-
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+  </body>
 </html>
