@@ -59,34 +59,42 @@
 
       </section>
 
-      <!-- RESULTS & ANALYSIS SECTION -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <section id="results">
-      
-      
-        <h2>Results &amp; Analysis</h2>
-        <p>
+     <!-- RESULTS & ANALYSIS SECTION -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<section id="results">
+
+<h2>Results &amp; Analysis</h2>
+<p>
 
 Install the key file:
 -The code lines below install a custom file for python.
-		
-         !wget -O turtle_setup.py 'https://raw.githubusercontent.com/williamedwardhahn/fractal25/refs/heads/main/turtle_setup.py'
+
+<pre><code class="language-python">
+!wget -O turtle_setup.py 'https://raw.githubusercontent.com/williamedwardhahn/fractal25/refs/heads/main/turtle_setup.py'
 from turtle_setup import *
+</code></pre>
 
-		//
-Sample Code 1: Draw equilateral Triangle
--The code below draws a green equilaterial triangle. 
+Sample Code 1: Draw Equilateral Triangle
+-The code below draws a green equilateral triangle.
 -The drawing starts at 300x500 and draws each side with 400 length.
--The turtle is facing up to start and 120 degree left turns are made.
+-The turtle is facing up to start and 120-degree left turns are made.
 
-		See Image:
-		<img src="https://github.com/Zboyan/labreports/blob/main/m3%20pic1.png" alt="See the Image" />
-		
-		See code below:
-		
+See Image:
+<figure>
+  <img
+    src="https://raw.githubusercontent.com/Zboyan/labreports/main/m3%20pic1.png"
+    alt="See the Image"
+    width="600"
+    height="400"
+    loading="lazy"
+  />
+</figure>
+
+See code below:
+<pre><code class="language-python">
 initializeTurtle()
 showturtle()
 
@@ -104,7 +112,8 @@ length = 400
 draw_triangle(length)
 
 show()
-
+</code></pre>
+</p>
 		//
 Experimental Code #1A: Draw green triangle and fill with yellow
 -The begin_fill and end_fill functions fill in the triangle with default color of yellow
