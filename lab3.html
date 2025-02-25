@@ -517,45 +517,53 @@ for rule in [30, 62, 90, 110, 126]:
 
 
 	
-Experimental Code #3B: Random rules and colors
--a list of 8 colors such as "magma," "turbo," and "coolwarm" are defined.
--five random rules from 256 are generated for which a random color is chosen per each rule.
--before all the drawings, the five randomly selected rules are printed "Randomly selected rules [###, ..., ###]"
--before the drawing, a statement is displayed via print "Rule ### using colormap xxxxxx"
+Experimental Code #3B: Random Rules and Colors
+-A list of 8 colors such as "magma," "turbo," and "coolwarm" are defined.
+-Five random rules from 256 are generated for which a random color is chosen per each rule.
+-Before all the drawings, the five randomly selected rules are printed "Randomly selected rules [###, ..., ###]"
+-Before the drawing, a statement is displayed via print "Rule ### using colormap xxxxxx"
 
-		See Image:
-		<img src="https://github.com/Zboyan/labreports/blob/main/m3%20pic9.png" alt="See the Image" />
-		
-		See code below:
+See Image:
+<figure>
+  <img
+    src="https://github.com/Zboyan/labreports/blob/main/m3%20pic9.png"
+    alt="See the Image"
+    width="600"
+    height="400"
+    loading="lazy"
+  />
+</figure>
 
+See code below:
+<pre><code class="language-python">
 import numpy as np
 import matplotlib.pyplot as plt
 import random
 
 def plot(x, cmap):
     fig, ax = plt.subplots()
-    im = ax.imshow(x, cmap=cmap)  
+    im = ax.imshow(x, cmap=cmap)
     ax.axis('off')
     fig.set_size_inches(10, 10)
     plt.show()
 
 def CA(X, rule):
-    rule = np.uint8(rule)  
+    rule = np.uint8(rule)
     rows, cols = X.shape
 
-    for i in range(1, rows - 1):  
+    for i in range(1, rows - 1):
         neighborhood = (
-            4 * X[i - 1, :-2] +  
-            2 * X[i - 1, 1:-1] +  
-            X[i - 1, 2:]  
+            4 * X[i - 1, :-2] +
+            2 * X[i - 1, 1:-1] +
+            X[i - 1, 2:]
         )
-        X[i, 1:-1] = (rule >> neighborhood) & 1  
+        X[i, 1:-1] = (rule >> neighborhood) & 1
 
     return X
 
 # Set up a grid
-C = np.zeros((100, 100), dtype=np.uint8)  
-C[0, 50] = 1  
+C = np.zeros((100, 100), dtype=np.uint8)
+C[0, 50] = 1
 
 # List of colormaps to randomly choose from
 colormaps = ['inferno', 'plasma', 'magma', 'viridis', 'cividis', 'coolwarm', 'turbo']
@@ -567,26 +575,31 @@ print("Randomly selected rules:", random_rules)
 for rule in random_rules:
     cmap = random.choice(colormaps)  # Pick a random colormap
     print(f"Rule {rule} using colormap: {cmap}")
-    plot(CA(C.copy(), rule), cmap=cmap)  
-		//
-Experimental Code #3C: Game of Life
--a game board of 50x50 is set where each cell has a probability of 80% dead (0) and 20% alive (1)
--There are two options to determine how the cells change status for each of the 9 steps after the initial step
--a live cell dies if it has less than 2 neighbors or more than 3 neighbors
--a dead cell revives if it has exactly 3 live neighbors
--these are discrete values: "<2 neighbors or >3neighbors" and "=3 neighbors"
--each step has a different color selected from a predetermined list.
--each step prints the "color", the step number "#" and the population of "alive: #### vs dead: ####"
--these values are stored and a summary of the initial alive, end alive, max alive, and min alive is printed at the end
+    plot(CA(C.copy(), rule), cmap=cmap)
+</code></pre>
 
-	See Images:
-		<img src="https://github.com/Zboyan/labreports/blob/main/m3%20pic10.png" alt="See the Image" />
-		<img src="https://github.com/Zboyan/labreports/blob/main/m3%20pic11.png" alt="See the Image" />
-		<img src="https://github.com/Zboyan/labreports/blob/main/m3%20pic12.png" alt="See the Image" />
-		<img src="https://github.com/Zboyan/labreports/blob/main/m3%20pic13.png" alt="See the Image" />
-		
-		See code below:
+
 	
+Experimental Code #3C: Game of Life
+-A game board of 50x50 is set where each cell has a probability of 80% dead (0) and 20% alive (1)
+-There are two options to determine how the cells change status for each of the 9 steps after the initial step
+-A live cell dies if it has less than 2 neighbors or more than 3 neighbors
+-A dead cell revives if it has exactly 3 live neighbors
+-These are discrete values: "<2 neighbors or >3 neighbors" and "=3 neighbors"
+-Each step has a different color selected from a predetermined list.
+-Each step prints the "color", the step number "#" and the population of "alive: #### vs dead: ####"
+-These values are stored and a summary of the initial alive, end alive, max alive, and min alive is printed at the end
+
+See Images:
+<figure>
+  <img src="https://github.com/Zboyan/labreports/blob/main/m3%20pic10.png" alt="See the Image" width="600" height="400" loading="lazy" />
+  <img src="https://github.com/Zboyan/labreports/blob/main/m3%20pic11.png" alt="See the Image" width="600" height="400" loading="lazy" />
+  <img src="https://github.com/Zboyan/labreports/blob/main/m3%20pic12.png" alt="See the Image" width="600" height="400" loading="lazy" />
+  <img src="https://github.com/Zboyan/labreports/blob/main/m3%20pic13.png" alt="See the Image" width="600" height="400" loading="lazy" />
+</figure>
+
+See code below:
+<pre><code class="language-python">
 import numpy as np
 import matplotlib.pyplot as plt
 import random
@@ -600,7 +613,7 @@ def plot(grid):
     ax.axis('off')
     fig.set_size_inches(10, 10)
     plt.show()
-    print(f"Using colormap: {cmap}")  # Print which colormap was used
+    print(f"Using colormap: {cmap}")
 
 def game_of_life(grid, steps=10):
     """Simulates Conway's Game of Life with random colors per step and logs statistics."""
@@ -630,7 +643,7 @@ def game_of_life(grid, steps=10):
         dead = grid.size - alive
         alive_counts.append(alive)
         dead_counts.append(dead)
-        print(f"Step {step + 1}: Alive = {alive}, Dead = {dead}")  
+        print(f"Step {step + 1}: Alive = {alive}, Dead = {dead}")
 
     # Print summary
     print("\nSummary of the simulation:")
@@ -645,7 +658,8 @@ initial_grid = np.random.choice([0, 1], size=(size, size), p=[0.8, 0.2])
 
 # Run Game of Life for 10 steps
 game_of_life(initial_grid, steps=10)
-		//
+</code></pre>
+		
 
 		
         </p>
@@ -657,29 +671,24 @@ game_of_life(initial_grid, steps=10)
 
 
 
-      <!-- CONCLUSION SECTION -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <section id="conclusion">
-        <h2>Conclusion</h2>
-        <p>
-         This Module explored both the Sierpinski Triangle and Wolfram Rules. 
-		The Sierpinski Triangle was generated both recursively and using Wolfram Rule 90. 
-		Other Wolfram Rules and applications were also explored. 
-		This module showed the powerful effects of recursion and Wolfram Rules.
-      </section>
+     <!-- CONCLUSION SECTION -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<section id="conclusion">
+  <h2>Conclusion</h2>
+  <p>
+    This Module explored both the Sierpinski Triangle and Wolfram Rules. 
+    The Sierpinski Triangle was generated both recursively and using Wolfram Rule 90. 
+    Other Wolfram Rules and applications were also explored. 
+    This module showed the powerful effects of recursion and Wolfram Rules.
+  </p>
+</section>
 
-     
-     
-     
-   
-     
-     
-     
-  </main>
+</main>
 
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
 </body>
 </html>
