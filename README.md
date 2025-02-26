@@ -10,3 +10,5 @@ Web Page: https://zboyan.github.io/labreports/
 [Lab 2:] (https://zboyan.github.io/labreports/lab2.html)
 
 [Lab 3:] (https://zboyan.github.io/labreports/lab3.html)
+
+[Lab 4:] (https://zboyan.github.io/labreports/lab4.html)
