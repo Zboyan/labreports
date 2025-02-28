@@ -170,6 +170,74 @@ plt.show()
           />
         </figure>
 
+Experimental Code Set 2:
+	    -The draw flower function draws a polar rose curve with 5 petals.
+	    -The flower is only placed on branches with recursion depth of 2 or 3.
+	    -Additionally, the flowers are produced in a random vibrant color.
+	    
+<pre><code>
+
+import matplotlib.pyplot as plt
+import numpy as np
+import random
+
+# Function to generate random vibrant colors
+def random_color():
+    return np.random.rand(3,)  # RGB tuple for random color
+
+# Function to draw a flower using a polar pattern (rose curve)
+def draw_flower(ax, x, y):
+    t = np.linspace(0, 2 * np.pi, 100)  # Angle range from 0 to 2π
+    r = 0.1 * np.cos(5 * t)  # Rose curve with 5 petals
+    x_flower = x + r * np.cos(t)
+    y_flower = y + r * np.sin(t)
+    
+    ax.plot(x_flower, y_flower, color=random_color(), linewidth=1.5)
+
+# Recursive function to draw the fractal tree
+def fractal_tree(ax, x, y, angle, length, depth):
+    if depth == 0:
+        return
+    
+    # Compute the next branch end position
+    new_x = x + length * np.cos(np.radians(angle))
+    new_y = y + length * np.sin(np.radians(angle))
+    
+    # Draw the branch with a random color
+    ax.plot([x, new_x], [y, new_y], color=random_color(), linewidth=depth / 2)
+
+    # Randomly place a flower at certain branch levels (e.g., depth 2 or 3)
+    if depth == random.choice([2, 3]):
+        draw_flower(ax, new_x, new_y)
+
+    # Recursive calls for left and right branches
+    fractal_tree(ax, new_x, new_y, angle - random.randint(20, 40), length * 0.7, depth - 1)
+    fractal_tree(ax, new_x, new_y, angle + random.randint(20, 40), length * 0.7, depth - 1)
+
+# Set up Matplotlib figure
+fig, ax = plt.subplots(figsize=(6, 6))
+ax.set_facecolor('black')  # Set black background
+ax.axis('off')  # Hide axes for a clean look
+
+# Draw the fractal tree with flowers
+fractal_tree(ax, 0, -1, 90, 1, 8)
+
+# Display the result
+plt.show()
+
+	</code></pre>
+
+<figure>
+          <img
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m4pic3.png"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+
+	    
       <!-- RESULTS & ANALYSIS SECTION -->
       <!-- -------------------------------------------------------------------------------------------- -->
       <!-- -------------------------------------------------------------------------------------------- -->
