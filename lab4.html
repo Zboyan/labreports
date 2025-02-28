@@ -49,15 +49,69 @@
 	<!-- -------------------------------------------------------------------------------------------- -->
 	<!-- -------------------------------------------------------------------------------------------- -->
 	<!-- -------------------------------------------------------------------------------------------- -->
+
+	Sample Code #1: 
+	    -Draws a fractal tree by recursion and turtle graphics.
+	    -Branches into 2 smaller branches. 
+	    -Base Case is when the recursion depth reaches 0, the branches stop, the initial recursion depth is 7 times.
+	    -The branch is drawn by a certain length (of 100) forward at first and 70% of the last branch.
+	    -The left branch is drawn first, then the right branch, before repeating.
+	    -a 500x500 grid is set with the center at 250x450 and the turtle facing up with lines drawn in green.
+	    
+	    
 	<section id="code">
 	<pre><code class="language-python">
 
-ENTER CODE WRITTEN HERE
+# Function to draw a fractal tree using recursion
+def fractal_tree(length, depth):
+    if depth == 0:
+        return
+    else:
 
+        forward(length)
+        left(30)
+
+        fractal_tree(length * 0.7, depth - 1)
+
+        right(60)
+
+        fractal_tree(length * 0.7, depth - 1)
+
+        left(30)
+        backward(length)
+
+# Initialize the turtle
+	initializeTurtle(initial_window_size=(500, 500))
+
+# Set up the turtle's starting position and orientation
+	jump(250, 450)  # Starting position at the bottom center of the canvas
+	face(0)
+	color('green')  # Set the pen color
+
+# Set the length and depth for the fractal tree
+	length = 100  # Initial length of the main trunk
+	depth = 7     # Recursion depth (number of branching levels)
+
+# Draw the fractal tree
+	fractal_tree(length, depth)
+
+# Display the drawing
+	show()
 
 	</code></pre>
 
       </section>
+
+	    <figure>
+          <img
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m4pic1.png"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+
 
       <!-- RESULTS & ANALYSIS SECTION -->
       <!-- -------------------------------------------------------------------------------------------- -->
