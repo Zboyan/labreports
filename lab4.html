@@ -113,6 +113,63 @@ def fractal_tree(length, depth):
         </figure>
 
 
+Experimental Code 1:
+	    -A fractal tree is now drawn with the option of random vibrant colors per each branch.
+	    -The background is set to black so the colors pop.
+	    -Branches are produced to the left and the right at random angles between 20 and 40 degrees versus fixed 30 degrees. 
+	    -This causes asymmetry, but also a more natural tree shape.
+	    -matplotlib was used versus turtle for ease of coding.
+	    -In some cases, radians were used versus degrees, particularly inside the cos/sin functions
+
+	    <pre><code>
+
+import matplotlib.pyplot as plt
+import numpy as np
+import random
+
+# Function to generate random vibrant colors
+def random_color():
+    return np.random.rand(3,)  # Generates an RGB tuple
+
+# Recursive function to draw the fractal tree
+def fractal_tree(ax, x, y, angle, length, depth):
+    if depth == 0:
+        return
+    
+    # Calculate new branch endpoints
+    new_x = x + length * np.cos(np.radians(angle))
+    new_y = y + length * np.sin(np.radians(angle))
+    
+    # Draw branch with a random color
+    ax.plot([x, new_x], [y, new_y], color=random_color(), linewidth=depth/2)
+    
+    # Recursive calls for left and right branches
+    fractal_tree(ax, new_x, new_y, angle - random.randint(20, 40), length * 0.7, depth - 1)
+    fractal_tree(ax, new_x, new_y, angle + random.randint(20, 40), length * 0.7, depth - 1)
+
+# Set up Matplotlib figure
+fig, ax = plt.subplots(figsize=(6, 6))
+ax.set_facecolor('black')  # Set black background
+ax.axis('off')  # Hide axes
+
+# Draw the fractal tree
+fractal_tree(ax, 0, -1, 90, 1, 8)
+
+# Show the plot
+plt.show()
+
+	</code></pre>
+
+	<figure>
+          <img
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m4pic2.png"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+
       <!-- RESULTS & ANALYSIS SECTION -->
       <!-- -------------------------------------------------------------------------------------------- -->
       <!-- -------------------------------------------------------------------------------------------- -->
