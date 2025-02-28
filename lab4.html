@@ -237,6 +237,89 @@ plt.show()
           />
         </figure>
 
+Experimental Code Set 3:
+	    -Flowers can now appear in more locations of the tree. 
+	    -The span of recursions they can appear is 2 to 4, inclusive.
+	    -Different types of flowers are randomly selected, not just the 5 petal rose.
+	    -These include 3, 6, and 7 petal roses, sprial flowers, and circular flowers.
+
+	<pre><code>
+
+import matplotlib.pyplot as plt
+import numpy as np
+import random
+
+# Function to generate random vibrant colors
+def random_color():
+    return np.random.rand(3,)  # Random RGB color
+
+# Function to draw a flower using a polar pattern (rose curve, spiral, or circle)
+def draw_flower(ax, x, y):
+    t = np.linspace(0, 2 * np.pi, 100)  # Angle range from 0 to 2π
+    
+    # Choose a random flower type
+    flower_type = random.choice(["rose", "spiral", "circle"])
+    
+    if flower_type == "rose":
+        petals = random.choice([3, 5, 6, 7])  # Random petal count
+        r = 0.1 * np.cos(petals * t)  # Rose curve formula
+        x_flower = x + r * np.cos(t)
+        y_flower = y + r * np.sin(t)
+        
+    elif flower_type == "spiral":
+        r = np.linspace(0, 0.1, 100)  # Spiral radius increasing
+        x_flower = x + r * np.cos(6 * t)  # Spiral effect
+        y_flower = y + r * np.sin(6 * t)
+        
+    elif flower_type == "circle":
+        r = 0.05  # Fixed radius for circular flowers
+        x_flower = x + r * np.cos(t)
+        y_flower = y + r * np.sin(t)
+    
+    ax.plot(x_flower, y_flower, color=random_color(), linewidth=1.5)
+
+# Recursive function to draw the fractal tree
+def fractal_tree(ax, x, y, angle, length, depth):
+    if depth == 0:
+        return
+    
+    # Compute the next branch end position
+    new_x = x + length * np.cos(np.radians(angle))
+    new_y = y + length * np.sin(np.radians(angle))
+    
+    # Draw the branch with a random color
+    ax.plot([x, new_x], [y, new_y], color=random_color(), linewidth=depth / 2)
+
+    # Randomly place flowers at multiple depths
+    if depth in random.sample(range(2, 5), random.randint(1, 2)):  # 1-2 flowers at depths 2-4
+        draw_flower(ax, new_x, new_y)
+
+    # Recursive calls for left and right branches
+    fractal_tree(ax, new_x, new_y, angle - random.randint(20, 40), length * 0.7, depth - 1)
+    fractal_tree(ax, new_x, new_y, angle + random.randint(20, 40), length * 0.7, depth - 1)
+
+# Set up Matplotlib figure
+fig, ax = plt.subplots(figsize=(6, 6))
+ax.set_facecolor('black')  # Set black background
+ax.axis('off')  # Hide axes for a clean look
+
+# Draw the fractal tree with varied flowers
+fractal_tree(ax, 0, -1, 90, 1, 8)
+
+# Display the result
+plt.show()
+
+	</code></pre>
+
+	<figure>
+          <img
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m4pic4.png"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
 	    
       <!-- RESULTS & ANALYSIS SECTION -->
       <!-- -------------------------------------------------------------------------------------------- -->
