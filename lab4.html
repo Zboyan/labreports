@@ -312,11 +312,34 @@ fractal_tree(ax, 0, -1, 90, 1, 8)
 # Display the result
 plt.show()
 
+		</code></pre>
+
+Sample Code Set #2: 
+		-This code expands the initial sample code into a larger tree.
+		-The starting branch length is 80 with 8 recursion levels and 25 degree angles.
+		-The grid is set to 800 by 800 with the tree started at 400 by 600
+		
+<pre><code>
+
+# Initialize the turtle
+initializeTurtle(initial_window_size=(800, 800))
+
+# Set up the turtle's starting position and orientation
+jump(400, 600)  # Starting position at the bottom center of the canvas
+face(0)
+color('green')  # Set the pen color
+
+# Draw the fractal tree
+build_tree(80, 8, 25)
+
+# Display the drawing
+show()
+
 	</code></pre>
 
 	<figure>
           <img
-            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m4pic4.png"
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m4pic5.png"
             alt="ADD AN IMAGE HERE"
             width="600"
             height="400"
