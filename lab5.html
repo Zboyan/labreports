@@ -113,7 +113,7 @@ plt.show()
 
 	</code></pre>
 
-		    <figure>
+	<figure>
           <img
             src="https://raw.githubusercontent.com/Zboyan/labreports/main/m5pic1.png"
             alt="ADD AN IMAGE HERE"
@@ -122,6 +122,75 @@ plt.show()
             loading="lazy"
           />
         </figure>
+
+Experimental Code Set #1:
+	      -
+	      -
+	      -
+	      -
+	      -
+	      -
+
+<pre><code class>
+
+	# Import necessary libraries
+import numpy as np
+import matplotlib.pyplot as plt
+import random
+
+# Set initial parameters
+x_start = 0       # Starting x-coordinate of the first bar
+x_end = 3         # Ending x-coordinate of the first bar
+y_position = 0    # Starting y-coordinate (height of the first bar)
+bar_height = 5    # Height of each bar
+spacing = 10      # Space between bars (distance downwards)
+depth = 6         # Number of levels to draw
+
+# Generate random colors for each depth level
+colors = {i: (random.random(), random.random(), random.random()) for i in range(depth)}
+
+# Define a function to create the Cantor Set pattern with depth tracking
+def cantor_set(x_start, x_end, y_position, depth, current_depth=0):
+    if depth == 0:
+        return []
+
+    # Left and right segments for the current bar
+    left_segment = [[x_start, x_start + (x_end - x_start) / 3, y_position, current_depth]]
+    right_segment = [[x_end - (x_end - x_start) / 3, x_end, y_position, current_depth]]
+
+    # Recursively generate segments for the next levels
+    left_recursive = cantor_set(x_start, x_start + (x_end - x_start) / 3, y_position - spacing, depth - 1, current_depth + 1)
+    right_recursive = cantor_set(x_end - (x_end - x_start) / 3, x_end, y_position - spacing, depth - 1, current_depth + 1)
+
+    # Combine the current segments with the results from recursive calls
+    return left_segment + right_segment + left_recursive + right_recursive
+
+# Generate Cantor Set segments data
+segments = np.array(cantor_set(x_start, x_end, y_position, depth))  # Convert to an array for easy plotting
+
+# Plot the Cantor Set
+plt.figure(figsize=(25, 25))
+
+# Draw each segment with colors based on depth
+for x_start, x_end, y, level in segments:
+    plt.fill_between([x_start, x_end], [y] * 2, [y - bar_height] * 2, color=colors[int(level)])
+
+# Hide the axes for a clean look
+plt.axis('off')
+plt.show()
+
+	
+</code></pre>
+
+<figure>
+          <img
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m5pic2.png"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+</figure>
 
 
       </section>
@@ -133,11 +202,6 @@ plt.show()
       <!-- -------------------------------------------------------------------------------------------- -->
       <section id="results">
       
-      
-        <h2>Results &amp; Analysis</h2>
-        <p>
-          ANALYSIS ANALYSIS ANALYSIS
-        </p>
 
 
 
@@ -157,119 +221,9 @@ plt.show()
 
 
 
-
       </section>
 
- <h2>Part 2: TOPIC</h2>
-        <p>
-          DESCRIPTION DESCRIPTION DESCRIPTION
-        </p>
-      </section>
-
-
-     
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<section id="code">
-	<pre><code class="language-python">
-
-ENTER YOUR CODE HERE
-		
-	</code></pre>
-
-
-</section>
-
-      <!-- RESULTS & ANALYSIS SECTION -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <section id="results">
-      
-      
-        <h2>Results &amp; Analysis</h2>
-        <p>
-        ANALYSIS ANALYSIS ANALYSIS
-        </p>
-
-
-
-
-        <figure>
-          <img
-            src="IMG_0130_Original.jpeg"
-            alt="ENTER AN IMAGE"
-            width="600"
-            height="400"
-            loading="lazy"
-          />
-          <figcaption>
-            ENTER AN IMAGE
-          </figcaption>
-        </figure>
-
-
-      </section>
-
- <h2>Part 3: TOPIC</h2>
-        <p>
-          DESCRIPTION DESCRIPTION DESCRIPTION
-        </p>
-      </section>
-
-
-     
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<section id="code">
-	<pre><code class="language-python">
-
-ENTER YOUR CODE HERE
-
-		
-	</code></pre>
-
-
-</section>
-
-      <!-- RESULTS & ANALYSIS SECTION -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <section id="results">
-      
-      
-        <h2>Results &amp; Analysis</h2>
-        <p>
-        ANALYSIS ANALYSIS ANALYSIS
-        </p>
-
-
-
-
-        <figure>
-          <img
-            src="IMG_0130_Original.jpeg"
-            alt="ENTER AN IMAGE HERE"
-            width="600"
-            height="400"
-            loading="lazy"
-          />
-          <figcaption>
-            ENTER AN IMAGE HERE
-          </figcaption>
-        </figure>
-
-
-
-
-      </section>
+ 
 	    
       <!-- RESULTS & ANALYSIS SECTION -->
       <!-- -------------------------------------------------------------------------------------------- -->
