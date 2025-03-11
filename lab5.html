@@ -30,6 +30,9 @@
       <section id="introduction">
         <h2>Part 1: TOPIC</h2>
         <p>
+
+		Module 5 features
+		
           INTRODUCTION INTRODUCTION
 
 		<ul>
@@ -45,13 +48,81 @@
 	<!-- -------------------------------------------------------------------------------------------- -->
 	<!-- -------------------------------------------------------------------------------------------- -->
 	<!-- -------------------------------------------------------------------------------------------- -->
-	<section id="code">
+	
+Sample code Set #1: 
+	    -This code generates a Cantor Set. 
+	    -Recursive subdivision is used. 
+	    -Imports: Numpy is used to handle numerical data efficiently and MatPlot is for plotting.
+	    -Two Parameters of x_start and x_end are used to define the initial horizontal span of the first bar.
+	    -One Parameter of y_position sets the vertical position of the first bar.
+	    -Three Parameters of bar_height, spacing, and depth set height of each bar, space between recursion levels, and number of recursions to generate.
+	    -Cantor Set Recursion Function: if depth is 0, then empty list is produced.
+	    -The left and right segements are computed by removing the middle third. 
+	    -The function is recursively applied to lower depths (decreasing).
+	    -A list is returned with x_start, x_end, and y_position after each segment.
+	    -Cantor Set is then called with the inital parameters and converted into a Numpy array.
+	    -The Cantor Set is then plotted on a 25x25 grid with no axii for easy viewing
+	    -Iterates over computed segment data by drawing black filled bars.
+	    -The output is displayed with black horizontal bars in which each following level removes the middle third.
+	    
+	    <section id="code">
 	<pre><code class="language-python">
 
-ENTER CODE WRITTEN HERE
+# Import libraries for math and plotting
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Set initial parameters
+x_start = 0       # Starting x-coordinate of the first bar
+x_end = 3         # Ending x-coordinate of the first bar
+y_position = 0    # Starting y-coordinate (height of the first bar)
+bar_height = 5    # Height of each bar
+spacing = 10      # Space between bars (distance downwards)
+depth = 6         # Number of levels to draw
+
+# Define a function to create the Cantor Set pattern
+def cantor_set(x_start, x_end, y_position, depth):
+    if depth == 0:
+        return []
+
+    # Left and right segments for the current bar
+    left_segment = [[x_start, x_start + (x_end - x_start) / 3, y_position]]
+    right_segment = [[x_end - (x_end - x_start) / 3, x_end, y_position]]
+
+    # Recursively generate segments for the next levels
+    left_recursive = cantor_set(x_start, x_start + (x_end - x_start) / 3, y_position - spacing, depth - 1)
+    right_recursive = cantor_set(x_end - (x_end - x_start) / 3, x_end, y_position - spacing, depth - 1)
+
+    # Combine the current segments with the results from recursive calls
+    return left_segment + right_segment + left_recursive + right_recursive
+
+# Generate Cantor Set segments data
+segments = np.array(cantor_set(x_start, x_end, y_position, depth))  # Convert to an array for easy plotting
+
+# Plot the Cantor Set
+plt.figure(figsize=(25, 25))
+
+# Draw each segment as a black bar
+for x_start, x_end, y in segments:
+    plt.fill_between([x_start, x_end], [y] * 2, [y - bar_height] * 2, color="black")
+
+# Hide the axes for a clean look
+plt.axis('off')
+plt.show()
 
 
 	</code></pre>
+
+		    <figure>
+          <img
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m5pic1.png"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+
 
       </section>
 
