@@ -261,6 +261,81 @@ plt.show()
           />
 </figure>
 
+Experimental Code Set #4:
+		    -Cantor Dust starts with a square versus a line.
+		    -A 3x3 grid is drawn in which the middle square is removed, leaving a white space.
+		    -This is then repeated recursively for the remaining smaller squares.
+		    -Thus, 1, then 8, then 64, etc... squares are removed.
+		    -This is a 2D fractal version of the Cantor Set, forming a "scattered dust-like" pattern.
+		    -The pattern is produced in black and while, then random colors.
+
+<pre><code>
+		    
+import numpy as np
+import matplotlib.pyplot as plt
+import random
+
+# Set initial parameters
+x_start = 0       # X-coordinate start
+y_start = 0       # Y-coordinate start
+size = 3          # Initial size of the square
+depth = 3         # Keeps execution fast
+
+# Using an iterative approach to store squares with colors
+def cantor_dust_iterative(x, y, size, depth):
+    squares = [(x, y, size, random_color())]  # Start with the full square
+    for _ in range(depth):
+        new_squares = []
+        for x, y, s, color in squares:
+            new_size = s / 3  # Reduce square size
+            for i in range(3):
+                for j in range(3):
+                    if i == 1 and j == 1:  # Skip center square
+                        continue
+                    new_squares.append((x + i * new_size, y - j * new_size, new_size, random_color()))
+        squares = new_squares  # Update list for next iteration
+    return squares
+
+# Function to generate a random color
+def random_color():
+    return (random.random(), random.random(), random.random())  # RGB tuple
+
+# Generate Cantor Dust data
+squares = np.array(cantor_dust_iterative(x_start, y_start, size, depth), dtype=object)
+
+# Plot Cantor Dust
+plt.figure(figsize=(8, 8))  # Keep figure size reasonable
+
+# Draw each remaining square with its assigned random color
+for x, y, s, color in squares:
+    plt.fill_between([x, x + s], [y] * 2, [y - s] * 2, color=color)
+
+# Hide axes for a clean look
+plt.axis('off')
+plt.show()
+
+</code></pre>	
+
+<figure>
+          <img
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m5pic4.png"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+</figure>
+
+<figure>
+          <img
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m5pic5.png"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+</figure>
+
       </section>
 
       <!-- RESULTS & ANALYSIS SECTION -->
