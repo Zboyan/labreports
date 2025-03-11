@@ -124,12 +124,9 @@ plt.show()
         </figure>
 
 Experimental Code Set #1:
-	      -
-	      -
-	      -
-	      -
-	      -
-	      -
+	      -Now, a random color is assigned to each depth level using matplot's colors function
+	      -The recursive function tracks depth levels with current_depth
+	      -Everything else remains the same.
 
 <pre><code>
 
@@ -192,6 +189,77 @@ plt.show()
           />
 </figure>
 
+Experimental code Set #2:
+		    -This code creates the Cantor Curtains Set.
+		    -It starts with a large horizontal rectangle and removes the middle third.
+		    -Instead of a gap, like the Cantor Set, the Curtains fills/moves the removed part one depth/level below.
+		    -The cantor_curtains function is defined with x_start, x_end, y_position, depth, and current_depth.
+		    -The picture displays with random colors and gives a vertical drawn out appearance.
+		    
+<pre><code>
+
+import numpy as np
+import matplotlib.pyplot as plt
+import random
+
+# Set initial parameters
+x_start = 0       # Start x-coordinate of the first bar
+x_end = 3         # End x-coordinate of the first bar
+y_position = 0    # Starting y-coordinate (topmost level)
+bar_height = 5    # Height of each bar
+spacing = 10      # Space between levels
+depth = 6         # Number of recursion levels
+
+# Generate random colors for each depth level
+colors = {i: (random.random(), random.random(), random.random()) for i in range(depth)}
+
+# Define the function to generate the Cantor Curtains pattern
+def cantor_curtains(x_start, x_end, y_position, depth, current_depth=0):
+    if depth == 0:
+        return []
+    
+    # Calculate the segment width
+    third_width = (x_end - x_start) / 3
+
+    # Left and right segments (bars)
+    left_segment = [[x_start, x_start + third_width, y_position, bar_height, current_depth]]
+    right_segment = [[x_end - third_width, x_end, y_position, bar_height, current_depth]]
+
+    # Middle removed section (forms the "curtain" below)
+    curtain_segment = [[x_start + third_width, x_end - third_width, y_position - bar_height, spacing, current_depth]]
+
+    # Recursively generate segments for the next levels
+    left_recursive = cantor_curtains(x_start, x_start + third_width, y_position - spacing, depth - 1, current_depth + 1)
+    right_recursive = cantor_curtains(x_end - third_width, x_end, y_position - spacing, depth - 1, current_depth + 1)
+
+    # Combine all segments
+    return left_segment + right_segment + curtain_segment + left_recursive + right_recursive
+
+# Generate Cantor Curtains segments data
+segments = np.array(cantor_curtains(x_start, x_end, y_position, depth))  # Convert to an array for easy plotting
+
+# Plot the Cantor Curtains
+plt.figure(figsize=(15, 15))
+
+# Draw the bars and curtains
+for x_start, x_end, y, height, level in segments:
+    plt.fill_between([x_start, x_end], [y] * 2, [y - height] * 2, color=colors[int(level)])
+
+# Hide the axes for a clean look
+plt.axis('off')
+plt.show()
+	
+</code></pre>
+
+<figure>
+          <img
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m5pic3.png"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+</figure>
 
       </section>
 
