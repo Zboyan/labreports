@@ -336,6 +336,208 @@ plt.show()
           />
 </figure>
 
+Experimental Code Set #5:
+		    -This code is for the Menger Sponge.
+		    -Recursively divide a cube into smaller cubes by removing the central parts and leaving the remaining filled 3D cubes.
+		    -mpl_toolkits and Poly3DCollection allows for rendering of 3D objects.
+		    -depth is defined to control the recursion levels and also maintain a reasonable run time.
+		    -The sponge is defined by menger_sponge in x,y,and z dimensions, its size, and depth.
+		    -The ordered triple is set for the bottom left corner of each cube.
+		    -Each cube is 1/3 the size of the original.
+		    -A 3x3x3 grid is looped through with 27 sub-cubes at the next level.
+		    -The center cube and face-centered cubes are removed to create holes.
+		    -The function continues to create steadily smaller cubes.
+		    -A list is returned of all cubes that remain after recursion.
+		    -The initial cube is called 0,0,0,3,depth.
+		    -An array is used for the output.
+		    -10x10 figure and subplot are created.
+		    -Each cube is looped through with faces and vertices defined, 6 faces with 4 vertices.
+		    -Each face is set to skyblue with thin black edges and slight transparancy.
+		    -The viewing angle is set to elevation 25 with azimuth 30 degrees.
+		    -The sponge is kept within the viewing screen.
+		    -The grid and axii are hidden, then the sponge is shown.
+		    
+
+<pre><code>
+
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+
+# Set depth level (start low for performance)
+depth = 2  
+
+# Function to generate the Menger Sponge cubes
+def menger_sponge(x, y, z, size, depth):
+    if depth == 0:
+        return [(x, y, z, size)]  # Return the single cube
+    
+    new_size = size / 3  # Reduce cube size
+    cubes = []
+    
+    # Iterate over a 3×3×3 grid
+    for i in range(3):
+        for j in range(3):
+            for k in range(3):
+                # Remove center cube and face-center cubes
+                if (i == 1 and j == 1) or (i == 1 and k == 1) or (j == 1 and k == 1):
+                    continue
+                new_x = x + i * new_size
+                new_y = y + j * new_size
+                new_z = z + k * new_size
+                cubes.extend(menger_sponge(new_x, new_y, new_z, new_size, depth - 1))
+    
+    return cubes
+
+# Generate Menger Sponge cubes
+cubes = np.array(menger_sponge(0, 0, 0, 3, depth))
+
+# Plot the Menger Sponge
+fig = plt.figure(figsize=(10, 10))
+ax = fig.add_subplot(111, projection='3d')
+
+# Draw each cube
+for x, y, z, s in cubes:
+    # Define cube vertices
+    vertices = [
+        [x, y, z], [x + s, y, z], [x + s, y + s, z], [x, y + s, z],  # Bottom face
+        [x, y, z + s], [x + s, y, z + s], [x + s, y + s, z + s], [x, y + s, z + s]  # Top face
+    ]
+    
+    # Define cube faces
+    faces = [
+        [vertices[j] for j in [0, 1, 2, 3]],  # Bottom
+        [vertices[j] for j in [4, 5, 6, 7]],  # Top
+        [vertices[j] for j in [0, 1, 5, 4]],  # Front
+        [vertices[j] for j in [2, 3, 7, 6]],  # Back
+        [vertices[j] for j in [0, 3, 7, 4]],  # Left
+        [vertices[j] for j in [1, 2, 6, 5]]   # Right
+    ]
+
+    # Add cube to plot
+    ax.add_collection3d(Poly3DCollection(faces, facecolors='skyblue', edgecolors='k', linewidths=0.5, alpha=0.8))
+
+# Set view angle
+ax.view_init(elev=25, azim=30)
+
+# Set plot limits
+ax.set_xlim(0, 3)
+ax.set_ylim(0, 3)
+ax.set_zlim(0, 3)
+
+# Hide axes
+ax.axis('off')
+
+# Show plot
+plt.show()
+	
+</code></pre>
+
+<figure>
+          <img
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m5pic6.png"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+</figure>
+
+Experimental Code Set #6:
+		    -This produces a black wireframe of the menger sponge. 
+		    -This means that only the edges are rendered, thus giving the design a skeletal/scaffolding/hollow/grid look.
+		    -This overall sets up similar to the menger sponge code, but there are a few main differences.
+		    -The wireframe version is stored and drawn with Line3DCollection.
+		    -wireframe() is placed on the function to differentiate.
+		    -All edges are return after recursion, meaning it does not store faces.
+		    -The wireframe only produces edges, shown in black.
+		    -12 edges are defined per cube using pairs of connected vertices.
+
+<pre><code>
+
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d.art3d import Line3DCollection
+
+# Set depth level (start low for performance)
+depth = 2  
+
+# Function to generate the Menger Sponge edges
+def menger_sponge_wireframe(x, y, z, size, depth):
+    if depth == 0:
+        return [(x, y, z, size)]  # Return a single cube's coordinates
+
+    new_size = size / 3  # Reduce cube size
+    edges = []
+    
+    # Iterate over a 3×3×3 grid
+    for i in range(3):
+        for j in range(3):
+            for k in range(3):
+                # Remove center cube and face-center cubes
+                if (i == 1 and j == 1) or (i == 1 and k == 1) or (j == 1 and k == 1):
+                    continue
+                new_x = x + i * new_size
+                new_y = y + j * new_size
+                new_z = z + k * new_size
+                edges.extend(menger_sponge_wireframe(new_x, new_y, new_z, new_size, depth - 1))
+    
+    return edges
+
+# Generate Menger Sponge edges
+edges = menger_sponge_wireframe(0, 0, 0, 3, depth)
+
+# Plot the wireframe Menger Sponge
+fig = plt.figure(figsize=(10, 10))
+ax = fig.add_subplot(111, projection='3d')
+
+# Function to get cube edges
+def get_cube_edges(x, y, z, s):
+    """Returns the 12 edges of a cube at (x, y, z) with size s."""
+    points = [
+        [x, y, z], [x + s, y, z], [x + s, y + s, z], [x, y + s, z],  # Bottom face
+        [x, y, z + s], [x + s, y, z + s], [x + s, y + s, z + s], [x, y + s, z + s]  # Top face
+    ]
+    edges = [
+        [points[0], points[1]], [points[1], points[2]], [points[2], points[3]], [points[3], points[0]],  # Bottom
+        [points[4], points[5]], [points[5], points[6]], [points[6], points[7]], [points[7], points[4]],  # Top
+        [points[0], points[4]], [points[1], points[5]], [points[2], points[6]], [points[3], points[7]]   # Sides
+    ]
+    return edges
+
+# Draw each cube as a wireframe
+all_edges = []
+for x, y, z, s in edges:
+    all_edges.extend(get_cube_edges(x, y, z, s))
+
+ax.add_collection3d(Line3DCollection(all_edges, colors='black', linewidths=0.8))
+
+# Set view angle
+ax.view_init(elev=25, azim=30)
+
+# Set plot limits
+ax.set_xlim(0, 3)
+ax.set_ylim(0, 3)
+ax.set_zlim(0, 3)
+
+# Hide axes
+ax.axis('off')
+
+# Show plot
+plt.show()
+	
+</code></pre>
+
+<figure>
+          <img
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m5pic7.png"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+</figure>
+
       </section>
 
       <!-- RESULTS & ANALYSIS SECTION -->
@@ -349,32 +551,10 @@ plt.show()
 
 
 
-        <figure>
-          <img
-            src="IMG_0130_Original.jpeg"
-            alt="ADD AN IMAGE HERE"
-            width="600"
-            height="400"
-            loading="lazy"
-          />
-          <figcaption>
-            ADD AN IMAGE HERE
-          </figcaption>
-        </figure>
-
-
-
       </section>
 
  
 	    
-      <!-- RESULTS & ANALYSIS SECTION -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <section id="results">
-
 
       <!-- CONCLUSION SECTION -->
       <!-- -------------------------------------------------------------------------------------------- -->
