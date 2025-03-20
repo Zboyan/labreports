@@ -12,3 +12,5 @@ Reports for Fractal Geometry
 [Lab 4:] (https://zboyan.github.io/labreports/lab4.html)
 
 [Lab 5:] (https://zboyan.github.io/labreports/lab5.html)
+
+[Lab 6:] (https://zboyan.github.io/labreports/lab6.html)
