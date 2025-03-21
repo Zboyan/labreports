@@ -4,12 +4,6 @@
 <!-- -------------------------------------------------------------------------------------------- -->
 <!-- -------------------------------------------------------------------------------------------- -->
 <html>
-<head> <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="stylesheet" href="https://latex.vercel.app/style.css" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"/><script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]}};</script>
-
-<title>Fractal Geometry Lab Report</title>
-
-</head>
-	
 <body id="top">
 
 
@@ -17,8 +11,8 @@
   <header>
     <h1>Fractal Geometry <br> Lab Report</h1>
     <p class="author">
-      [Colette Chilton] <br />
-      [ENTER DATE HERE]
+      Courteney Zboyan <br />
+      3/21/25
   </header>
 </body>
 
@@ -49,14 +43,65 @@
 	<!-- -------------------------------------------------------------------------------------------- -->
 	<!-- -------------------------------------------------------------------------------------------- -->
 	<!-- -------------------------------------------------------------------------------------------- -->
-	<section id="code">
+	
+Sample Code Set#1:
+	    -Again, matlab and numpy were used for this code.
+	    -Numpy specifcally helped with evenly spaced numbers.
+	    -Matplot will be used for plotting and visualization.
+	    -The function generate_grid(size) was called.
+	    -linspace(-1, 1, size) created evenly spaced values between -1 and 1 for both coordinates.
+	    -meshgrid(x,y) created a 2D grid for the x and y values.
+	    -Two arrays are returned for x and y values where each row and column respectively has the same value.
+	    -plt.scatter(x_grid, y_grid, s=1, and color='blue') is called with showing a scatterplot to display the points, s=1 to control the size, and blue color.
+	    -plt.figure(figsize=(10,10)) creates a large figure to display the grid.
+	    -plt.title(f'2D Grid of................) sets the title to match the grid size.
+	    -size=50 sets the grid size to 50 in both the x and the y directions.
+	    -generate_grid(size) creates the grid and plot_grid(grid) visualizes it.
+	    
+	    <section id="code">
 	<pre><code class="language-python">
 
-ENTER CODE WRITTEN HERE
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Create a simple 2D grid of points using NumPy
+def generate_grid(size):
+    x = np.linspace(-1, 1, size)  # Generate 'size' number of points between -1 and 1
+    y = np.linspace(-1, 1, size)
+    grid = np.meshgrid(x, y)  # Create a 2D grid of points
+    return grid
+
+# Visualize the grid of points
+def plot_grid(grid):
+    x_grid, y_grid = grid
+    plt.figure(figsize=(10, 10))
+    plt.scatter(x_grid, y_grid, s=1, color='blue')  # Plot the grid points
+    plt.title(f'2D Grid of {len(x_grid)}x{len(y_grid)} points')
+    plt.show()
+
+# Set the size of the grid
+size = 50  # You can adjust this to make the grid denser or sparser
+
+# Generate and plot the grid
+grid = generate_grid(size)
+plot_grid(grid)
+
 
 
 	</code></pre>
 
+<figure>
+          <img
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m6pic1.png"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+
+
+		    
       </section>
 
       <!-- RESULTS & ANALYSIS SECTION -->
