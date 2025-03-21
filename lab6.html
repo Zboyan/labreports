@@ -100,7 +100,84 @@ plot_grid(grid)
           />
         </figure>
 
+Experimental Code Set#1:
+		    -randomizes the color of the dots in the same code.
 
+<pre><code>
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Create a simple 2D grid of points using NumPy
+def generate_grid(size):
+    x = np.linspace(-1, 1, size)  # Generate 'size' number of points between -1 and 1
+    y = np.linspace(-1, 1, size)
+    grid = np.meshgrid(x, y)  # Create a 2D grid of points
+    return grid
+
+# Visualize the grid of points with random colors
+def plot_grid(grid):
+    x_grid, y_grid = grid
+    num_points = x_grid.size  # Total number of points
+    colors = np.random.rand(num_points, 3)  # Generate random RGB colors
+
+    plt.figure(figsize=(10, 10))
+    plt.scatter(x_grid, y_grid, s=10, c=colors, marker="o")  # Assign random colors
+    plt.title(f'2D Grid of {len(x_grid)}x{len(y_grid)} points with Random Colors')
+    plt.show()
+
+# Set the size of the grid
+size = 50  # Adjust for density
+
+# Generate and plot the grid
+grid = generate_grid(size)
+plot_grid(grid)
+	
+</code></pre>
+
+<figure>
+          <img
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m6pic2.png"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+
+Sample Code Set#2:
+		-
+		-
+
+<pre><code>
+
+def iterative_transform(grid, iterations):
+    x_grid, y_grid = grid
+    z = x_grid + 1j * y_grid  # Create a complex plane
+    for i in range(iterations):
+        z = z ** 2 - 0.5  # Iteratively apply the transformation
+    return np.real(z), np.imag(z)
+
+# Set the number of iterations
+iterations = 1
+
+# Apply the iterative transformation
+fractal_grid = iterative_transform(grid, iterations)
+
+# Plot the fractal grid
+plot_grid(fractal_grid)
+	
+</code></pre>
+
+<figure>
+          <img
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m6pic3.png"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
 		    
       </section>
 
