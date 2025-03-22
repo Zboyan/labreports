@@ -146,8 +146,13 @@ plot_grid(grid)
         </figure>
 
 Sample Code Set#2:
-		-
-		-
+		-An iterative complex transformation is applied to a 2D grid of points.
+		-The grid is created via tuple, which is meshgrid of x and y coordinates.
+		-Iterations is the number of times to apply the transformations.
+		-The grid is converted into complex numbers where x is the real part and y is the imaginary part, this maps the 2D plane onto the complex plane.
+		-The transformation of z^2 - 0.5 is applied for each iteration. 
+		-The transformation resmebles the Julia set Fractal behavior.
+		-Even after 1 iteration, the grid is warped.
 
 <pre><code>
 
@@ -178,154 +183,77 @@ plot_grid(fractal_grid)
             loading="lazy"
           />
         </figure>
-		    
-      </section>
 
-      <!-- RESULTS & ANALYSIS SECTION -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <section id="results">
-      
-      
-        <h2>Results &amp; Analysis</h2>
-        <p>
-          ANALYSIS ANALYSIS ANALYSIS
-        </p>
+Experimental Code Set#2:
+		    -The code is modified to show the escape behavior of the points to infinity in the complex plane.
+		    -The grid is defined to cover a large portion of the complex plane spanning -2 to 2.
+		    -The transformation iterated for each point.
+		    -How many iterations for "escape" is tracked and visualized via color map.
+		    -The transformation of z^2 + c is applied for each iteration, where c is "-0.5 + 0.6j" defines the Julia pattern.
+		    -Each point starts at z = x + iy; if |z| > 2, the point escapes (diverges to infinity).
+		    -The plot is displayed with "inferno" colors where dark areas are points that do not escape while bright areas show how quickly points escape.
 
+<pre><code>
 
+import numpy as np
+import matplotlib.pyplot as plt
 
+def generate_grid(size, bounds=(-2, 2, -2, 2)):
+    """Creates a 2D grid of complex points over the specified bounds."""
+    x_min, x_max, y_min, y_max = bounds
+    x = np.linspace(x_min, x_max, size)
+    y = np.linspace(y_min, y_max, size)
+    X, Y = np.meshgrid(x, y)
+    return X + 1j * Y  # Complex plane grid
 
-        <figure>
+def julia_set(grid, c=-0.5 + 0.6j, max_iter=100):
+    """Computes the number of iterations before points escape."""
+    z = grid.copy()
+    escape_time = np.full(z.shape, max_iter)  # Default to max iterations
+    
+    for i in range(max_iter):
+        mask = np.abs(z) <= 2  # Points that haven’t escaped yet
+        z[mask] = z[mask] ** 2 + c  # Apply Julia transformation
+        escape_time[mask & (np.abs(z) > 2)] = i  # Track escape iterations
+        
+    return escape_time
+
+def plot_julia(escape_time):
+    """Plots the Julia set using the escape times."""
+    plt.figure(figsize=(10, 10))
+    plt.imshow(escape_time, cmap='inferno', extent=(-2, 2, -2, 2))
+    plt.colorbar(label="Escape Iterations")
+    plt.title("Julia Set Visualization")
+    plt.xlabel("Re(z)")
+    plt.ylabel("Im(z)")
+    plt.show()
+
+# Parameters
+size = 500  # Grid resolution
+c = -0.5 + 0.6j  # Julia set parameter (change this for different patterns)
+max_iter = 100  # Number of iterations
+
+# Generate and plot the Julia Set
+grid = generate_grid(size)
+escape_time = julia_set(grid, c, max_iter)
+plot_julia(escape_time)
+
+</code></pre>
+
+<figure>
           <img
-            src="IMG_0130_Original.jpeg"
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m6pic4.png"
             alt="ADD AN IMAGE HERE"
             width="600"
             height="400"
             loading="lazy"
           />
-          <figcaption>
-            ADD AN IMAGE HERE
-          </figcaption>
         </figure>
-
-
-
-
-      </section>
-
- <h2>Part 2: TOPIC</h2>
-        <p>
-          DESCRIPTION DESCRIPTION DESCRIPTION
-        </p>
+		    
       </section>
 
 
-     
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<section id="code">
-	<pre><code class="language-python">
-
-ENTER YOUR CODE HERE
-		
-	</code></pre>
-
-
-</section>
-
-      <!-- RESULTS & ANALYSIS SECTION -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <section id="results">
-      
-      
-        <h2>Results &amp; Analysis</h2>
-        <p>
-        ANALYSIS ANALYSIS ANALYSIS
-        </p>
-
-
-
-
-        <figure>
-          <img
-            src="IMG_0130_Original.jpeg"
-            alt="ENTER AN IMAGE"
-            width="600"
-            height="400"
-            loading="lazy"
-          />
-          <figcaption>
-            ENTER AN IMAGE
-          </figcaption>
-        </figure>
-
-
-      </section>
-
- <h2>Part 3: TOPIC</h2>
-        <p>
-          DESCRIPTION DESCRIPTION DESCRIPTION
-        </p>
-      </section>
-
-
-     
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<!-- -------------------------------------------------------------------------------------------- -->
-	<section id="code">
-	<pre><code class="language-python">
-
-ENTER YOUR CODE HERE
-
-		
-	</code></pre>
-
-
-</section>
-
-      <!-- RESULTS & ANALYSIS SECTION -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <section id="results">
-      
-      
-        <h2>Results &amp; Analysis</h2>
-        <p>
-        ANALYSIS ANALYSIS ANALYSIS
-        </p>
-
-
-
-
-        <figure>
-          <img
-            src="IMG_0130_Original.jpeg"
-            alt="ENTER AN IMAGE HERE"
-            width="600"
-            height="400"
-            loading="lazy"
-          />
-          <figcaption>
-            ENTER AN IMAGE HERE
-          </figcaption>
-        </figure>
-
-
-
-
-      </section>
-	    
+       
       <!-- RESULTS & ANALYSIS SECTION -->
       <!-- -------------------------------------------------------------------------------------------- -->
       <!-- -------------------------------------------------------------------------------------------- -->
