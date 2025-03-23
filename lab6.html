@@ -184,7 +184,7 @@ plot_grid(fractal_grid)
           />
         </figure>
 
-Experimental Code Set#2:
+Experimental Code Set#2: Julia Set Fractal
 		    -The code is modified to show the escape behavior of the points to infinity in the complex plane.
 		    -The grid is defined to cover a large portion of the complex plane spanning -2 to 2.
 		    -The transformation iterated for each point.
@@ -308,7 +308,7 @@ plot_grid(fractal_grid)
           />
         </figure>
 
-Exerpimental Code Set#3:
+Exerpimental Code Set#3: Burning Ship Fractal
 		    -linspace and meshgrid create evenly spaced values within a span and a 2D grid
 		    -The equation of "X + 1j * Y" converts the grid to complex numbers.
 		    -The burning ship function is defined with escape times for each point.
@@ -370,6 +370,70 @@ plot_burning_ship(escape_time)
 <figure>
           <img
             src="https://raw.githubusercontent.com/Zboyan/labreports/main/m6pic7.png"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+
+Experimental Code Set#4: Tricorn Fractal
+		    -In a variation, Z is conjugated before squaring, thus flipping the imaginary part's sign.
+		    -This ends up creating reflectional symmetry across the real axis rather than self-similar symmetry.
+		    -The points all start at z = 0 and escape times are tracked until they exceed 2.
+		    -It looks like three-pronged forks, hence the name.
+		    -The inferno colormap is used to display the fractal on legend -2 to 2 and -2 to 2
+
+<pre><code>
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def generate_grid(size, bounds=(-2, 2, -2, 2)):
+    """Creates a 2D grid of complex points over the specified bounds."""
+    x_min, x_max, y_min, y_max = bounds
+    x = np.linspace(x_min, x_max, size)
+    y = np.linspace(y_min, y_max, size)
+    X, Y = np.meshgrid(x, y)
+    return X + 1j * Y  # Complex plane grid
+
+def tricorn(grid, max_iter=100):
+    """Computes the Tricorn fractal escape times for each point."""
+    c = grid
+    z = np.zeros_like(c, dtype=np.complex128)  # Start at 0 for all points
+    escape_time = np.full(z.shape, max_iter, dtype=int)  # Default escape time is max_iter
+    
+    for i in range(max_iter):  # Loop through iterations
+        mask = np.abs(z) < 2  # Points that haven't escaped yet
+        z[mask] = np.conj(z[mask]) ** 2 + c[mask]  # Apply Tricorn formula
+        escape_time[mask & (np.abs(z) >= 2)] = i  # Mark escape iterations
+        
+    return escape_time  # Return matrix of escape iterations
+
+def plot_tricorn(escape_time):
+    """Plots the Tricorn fractal."""
+    plt.figure(figsize=(10, 10))
+    plt.imshow(escape_time, cmap='inferno', extent=(-2, 2, -2, 2))
+    plt.colorbar(label="Escape Iterations")
+    plt.title("Tricorn Fractal")
+    plt.xlabel("Re(c)")
+    plt.ylabel("Im(c)")
+    plt.show()
+
+# Set parameters
+size = 1000  # Grid resolution (higher = more detail)
+max_iter = 200  # Maximum iterations
+
+# Generate and plot the Tricorn fractal
+grid = generate_grid(size)
+escape_time = tricorn(grid, max_iter)
+plot_tricorn(escape_time)
+	
+</code></pre>
+
+<figure>
+          <img
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m6pic8.png"
             alt="ADD AN IMAGE HERE"
             width="600"
             height="400"
