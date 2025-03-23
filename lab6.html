@@ -307,6 +307,75 @@ plot_grid(fractal_grid)
             loading="lazy"
           />
         </figure>
+
+Exerpimental Code Set#3:
+		    -linspace and meshgrid create evenly spaced values within a span and a 2D grid
+		    -The equation of "X + 1j * Y" converts the grid to complex numbers.
+		    -The burning ship function is defined with escape times for each point.
+		    -The function defines a real and imaginary part with Zn. 
+		    -The use of absolute value bars before squaring creates folding along both axii which produces the ship-like shape.
+		    -All points are initialized with z = 0 (placement at the origin), then real and imaginary parts are absolute valued and squared, then c is added.
+		    -If the absolute value of z exceeds 2, then the point is considered escaped.
+		    -Points that do not escape are part of the fractal's structure while those that escape at different times correspond to different layers of color.
+		    -The inferno colormap is used to display the fractal on legend -2.5 to 1.5 and -2 to 2
+
+<pre><code>
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def generate_grid(size, bounds=(-2.5, 1.5, -2, 2)):
+    """Creates a 2D grid of complex points over the specified bounds."""
+    x_min, x_max, y_min, y_max = bounds
+    x = np.linspace(x_min, x_max, size)
+    y = np.linspace(y_min, y_max, size)
+    X, Y = np.meshgrid(x, y)
+    return X + 1j * Y  # Complex plane grid
+
+def burning_ship(grid, max_iter=100):
+    """Computes the Burning Ship fractal escape times for each point."""
+    c = grid
+    z = np.zeros_like(c, dtype=np.complex128)  # Start at 0 for all points
+    escape_time = np.full(z.shape, max_iter, dtype=int)  # Default to max iterations
+    
+    for i in range(max_iter):
+        mask = np.abs(z) < 2  # Points that haven’t escaped yet
+        z[mask] = (np.abs(np.real(z[mask])) + 1j * np.abs(np.imag(z[mask])))**2 + c[mask]
+        escape_time[mask & (np.abs(z) >= 2)] = i  # Mark escape iterations
+    
+    return escape_time
+
+def plot_burning_ship(escape_time):
+    """Plots the Burning Ship fractal."""
+    plt.figure(figsize=(10, 10))
+    plt.imshow(escape_time, cmap='inferno', extent=(-2.5, 1.5, -2, 2))
+    plt.colorbar(label="Escape Iterations")
+    plt.title("Burning Ship Fractal")
+    plt.xlabel("Re(c)")
+    plt.ylabel("Im(c)")
+    plt.show()
+
+# Set parameters
+size = 1000  # Grid resolution (higher = more detail)
+max_iter = 200  # Maximum iterations
+
+# Generate and plot the Burning Ship fractal
+grid = generate_grid(size)
+escape_time = burning_ship(grid, max_iter)
+plot_burning_ship(escape_time)
+
+	
+</code></pre>
+
+<figure>
+          <img
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m6pic7.png"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
 		    
       </section>
 
