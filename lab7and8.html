@@ -517,14 +517,11 @@ Sample Code Set#1: Julia Set
 -The Julia Set function is defined with c, xmin, xmax, ymin, ymax, width, height, and max iterations, where c is the escape time and max iterations returns this.
 -The forumula used is iterated in a loop.
 -It is mapped to a complex number z = x + iy
--The forumula used in iteration is z with subscript n+1 = (z subscript n)^2 + c. 
+-The forumula used in iteration is f(z) = z^2 + c. 
 -The number of iterations it takes for absolute value of z to exceed 2 is counted and stored in an output array.
 -The output array, n3, represents how quickly each point escapes or doesn't.
-
-	**fix**
--The grid is set on -2 to 1 for x and -1.5 to 1.5 for y, along with 800x800 for widthxheight, and 100 max iterations.
--The zoom is set to -.75 to -.74 for x and .1 to .11 for y in order to examine a very small region of the Julia Set.
-
+-The grid is set on -1.5 to 1.5 for both x and y, along with 800x800 for widthxheight, and 256 max iterations.
+-The specific Julia Set being rendered is c = -.8 + .156i
 
 <pre><code>
 
@@ -571,6 +568,93 @@ plt.show()
 	
 </code></pre>
 
+  <figure>
+          <img
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m8pic1.png"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+
+Experimental Code Set#1:
+-This code set makes 6 cool Julia fractal designs appear in a 2x3 matrix in randomly selected colormaps.
+-The formulas are displayed for each along with their colormap.
+-Each is displayed with size 9x6
+
+<pre><code>
+
+import numpy as np
+import matplotlib.pyplot as plt
+from numba import jit
+import random
+
+# JIT-optimized function to generate the Julia Set
+@jit(nopython=True)
+def julia_set(c, xmin, xmax, ymin, ymax, width, height, max_iter):
+    r1 = np.linspace(xmin, xmax, width)
+    r2 = np.linspace(ymin, ymax, height)
+    n3 = np.empty((width, height))
+    
+    for i in range(width):
+        for j in range(height):
+            z = r1[i] + 1j * r2[j]
+            n = 0
+            while abs(z) <= 2 and n < max_iter:
+                z = z*z + c
+                n += 1
+            n3[i, j] = n
+    return n3
+
+# List of interesting c values
+c_values = [
+    complex(-0.8, 0.156),
+    complex(0.285, 0.01),
+    complex(-0.4, 0.6),
+    complex(0.355, 0.355),
+    complex(-0.70176, -0.3842),
+    complex(-0.835, -0.2321),
+]
+
+# Choose 6 unique colormaps
+colormaps = random.sample(
+    ['inferno', 'plasma', 'magma', 'cividis', 'twilight', 'turbo', 
+     'viridis', 'cubehelix', 'hot', 'cool'], 
+    k=6
+)
+
+# Set parameters
+xmin, xmax, ymin, ymax = -1.5, 1.5, -1.5, 1.5
+width, height = 400, 400
+max_iter = 256
+
+# Plot setup
+fig, axes = plt.subplots(2,3, figsize=(9, 6))
+axes = axes.flatten()
+
+for i, (ax, c, cmap) in enumerate(zip(axes, c_values, colormaps)):
+    n3 = julia_set(c, xmin, xmax, ymin, ymax, width, height, max_iter)
+    ax.imshow(n3.T, extent=[xmin, xmax, ymin, ymax], cmap=cmap, interpolation='bilinear')
+    ax.set_title(f"c = {c} | cmap = {cmap}")
+    ax.axis('off')
+
+plt.tight_layout()
+plt.show()
+
+	
+</code></pre>
+
+    <figure>
+          <img
+            src="https://raw.githubusercontent.com/Zboyan/labreports/main/m8pic2.png"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </figure>
+
    </section>
 
 
@@ -590,7 +674,7 @@ plt.show()
      
      <figure>
           <img
-            src="IMG_0130_Original.jpeg"
+            src="--"
             alt="ADD AN IMAGE HERE"
             width="600"
             height="400"
