@@ -48,7 +48,7 @@ Sample Code #1: Zoomed-In View of Mandelbrot Set.
 -The forumula used is z with subscript n+1 = (z subscript n)^2 + c. 
 -The MandelBrot Set function generates a 2D grid of complex numbers within a rectangular region.
 -The grid is set by xmin, xmax, ymin, ymax, width, height, and max iterations.
--Each complex number is is passed, then stored in an array based on escape time.
+-Each complex number is is passed, then stored in an array, n3, based on escape time.
 -The grid is set on -2 to 1 for x and -1.5 to 1.5 for y, along with 800x800 for widthxheight, and 100 max iterations.
 -The zoom is set to -.75 to -.74 for x and .1 to .11 for y in order to examine a very small region of the MandelBrot Set.
 -The max iteration is increased to 1000 to be able to see more detail.
@@ -509,6 +509,67 @@ plt.show()
         </figure>
 
     <h2>Part 2: TOPIC Module 8</h2>
+
+Sample Code Set#1: Julia Set
+-This code visualizes the Julia Set, a famous fractal.
+-The fractal is created from a complex quadratic polynomial.
+-Numpy and Matplot are imported, with Just In Time compiling.
+-The Julia Set function is defined with c, xmin, xmax, ymin, ymax, width, height, and max iterations, where c is the escape time and max iterations returns this.
+-The forumula used is iterated in a loop.
+-It is mapped to a complex number z = x + iy
+-The forumula used in iteration is z with subscript n+1 = (z subscript n)^2 + c. 
+-The number of iterations it takes for absolute value of z to exceed 2 is counted and stored in an output array.
+-The output array, n3, represents how quickly each point escapes or doesn't.
+
+	**fix**
+-The grid is set on -2 to 1 for x and -1.5 to 1.5 for y, along with 800x800 for widthxheight, and 100 max iterations.
+-The zoom is set to -.75 to -.74 for x and .1 to .11 for y in order to examine a very small region of the Julia Set.
+
+
+<pre><code>
+
+import numpy as np
+import matplotlib.pyplot as plt
+from numba import jit
+
+# JIT-optimized function to generate the Julia Set
+@jit(nopython=True)
+def julia_set(c, xmin, xmax, ymin, ymax, width, height, max_iter):
+    r1 = np.linspace(xmin, xmax, width)
+    r2 = np.linspace(ymin, ymax, height)
+    n3 = np.empty((width, height))
+
+    for i in range(width):
+        for j in range(height):
+            z = r1[i] + 1j * r2[j]
+            n = 0
+            while abs(z) <= 2 and n < max_iter:
+                z = z*z + c
+                n += 1
+            n3[i, j] = n
+
+    return n3
+
+# Parameters for the plot
+xmin, xmax, ymin, ymax = -1.5, 1.5, -1.5, 1.5
+width, height = 800, 800  # Image resolution
+max_iter = 256  # Number of iterations for accuracy
+
+# Choose a value for the complex constant c
+c = complex(-0.8, 0.156)
+
+# Generate the Julia Set
+n3 = julia_set(c, xmin, xmax, ymin, ymax, width, height, max_iter)
+
+# Plotting the Julia Set
+plt.figure(figsize=(10, 10))
+plt.imshow(n3.T, extent=[xmin, xmax, ymin, ymax], cmap='hot', interpolation='bilinear')
+plt.colorbar()
+plt.title(f"Julia Set for c = {c}")
+plt.show()
+
+	
+</code></pre>
 
    </section>
 
