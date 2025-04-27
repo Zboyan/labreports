@@ -92,12 +92,12 @@ plt.show()
             src="https://github.com/Zboyan/labreports/blob/main/mfpic1.png?raw=true"
             alt="ADD AN IMAGE HERE"
             width="600"
-            height="400"
+            height="500"
             loading="lazy"
           />
 </figure>
 
-Experimental Code Set #1:
+Experimental Code Set #1: Random Colors
 	-The same triangle is now generated with random colors by the same method.
 	-A list called colors is created with 50000 elements initialized as 0 in order to store colors.
 	-Later on, colors[0] followed by three randoms creates a tuple with three random values in RGB format.
@@ -142,7 +142,7 @@ plt.show()
             src="https://github.com/Zboyan/labreports/blob/main/mfpic2.png?raw=true"
             alt="ADD AN IMAGE HERE"
             width="600"
-            height="400"
+            height="500"
             loading="lazy"
           />
 </figure>
@@ -326,7 +326,7 @@ plt.show()
           />
         </figure>
 
-Experimental Code Set#3:
+Experimental Code Set#3: Random Colors
 	-The same fern is now generated with random colors by the same method.
 	-A list called colors is created with 100000 elements initialized as 0 in order to store colors.
 	-Later on, colors[0] followed by three randoms creates a tuple with three random values in RGB format.
@@ -413,7 +413,7 @@ plt.show()
           />
         </figure>
 
-Experimental Code Set #4:
+Experimental Code Set #4: Flowing Colors
 	-Now, the fern is created to make the colors flow gradually. 
 	-The function linspace(0,1, iterations) generates a smooth set of integers.
 	-The plasma colormap is used in converting numbers from 0 to 1 into colors from purple to yellow.
@@ -497,7 +497,7 @@ plt.show()
           />
         </figure>
 
-Experimental Code Set #5:
+Experimental Code Set #5: Loop the Rainbow
 	-Now, cycles are used to loop the rainbow a set number of times across the fern.
 	-The plt.cm.hsv(np.linspace(0, 1, iterations)) is a nice color scheme.
 	-The np.roll(colors, cycles, axis=0) shifts the colors across fern points so the rainbow seems to repeat.
@@ -589,6 +589,49 @@ plt.show()
           />
         </figure>
 
+Experimental Code Set #6: Playing with Probabilites
+	-I adjusted the probabilites for each function in the original green fern set previously to be: [0.01, 0.65, 0.17, 0.17]
+	-Increasing the f3 and f4 made the fern more bushy and the middle less dense.
+	-Then, I adjusted to: [0.01, 0.95, 0.02, 0.02]
+	-This makes the fern very skinny.
+	-Then, I adjusted to: [0.20, 0.50, 0.15, 0.15]
+	-This made a thick stem.
+	-Finally, I displayed all 4 in a 2x2 for easy comparison.
+
+<pre><code>
+
+# Settings for different ferns
+iterations = 50000  # fewer points to plot faster
+settings = [
+    ([0.01, 0.85, 0.07, 0.07], "Classic"),
+    ([0.01, 0.65, 0.17, 0.17], "Bushy"),
+    ([0.01, 0.95, 0.02, 0.02], "Skinny"),
+    ([0.10, 0.60, 0.15, 0.15], "Thick Stem"),
+]
+
+# Plotting
+fig, axs = plt.subplots(2, 2, figsize=(10, 15))
+
+for ax, (probs, title) in zip(axs.flatten(), settings):
+    fern_points = barnsley_fern(iterations, probs)
+    x_vals, y_vals = zip(*fern_points)
+    ax.scatter(x_vals, y_vals, s=0.1, color='green')
+    ax.set_title(f"Fern: {title}\n{probs}")
+    ax.axis('off')
+	
+</code></pre>
+
+	<figure>
+          <img
+            src="https://github.com/Zboyan/labreports/blob/main/mfpic8.png?raw=true"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="800"
+            loading="lazy"
+          />
+        </figure>
+	
+	
 	
       </section>
 
