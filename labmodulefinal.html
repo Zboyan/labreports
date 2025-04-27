@@ -1106,6 +1106,212 @@ show()
             loading="lazy"
           />
         </figure>
+
+
+Experimental Code Set#10:
+	-The code was converted from Turtle to MatplotLib in order to do random colors per segments easier.
+	-Turtle's drawing commands became MatplotLib's ax.plot's.
+
+<pre><code>
+
+import random
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Function to apply L-system rules
+def apply_rules(char, rules):
+    return rules.get(char, char)
+
+# Function to generate L-system string
+def generate_lsystem(axiom, rules, iterations):
+    current_string = axiom
+    for _ in range(iterations):
+        next_string = ''.join([apply_rules(char, rules) for char in current_string])
+        current_string = next_string
+    return current_string
+
+# Function to plot the L-system fractal using Matplotlib
+def draw_lsystem(turtle_string, x, y, angle, length, ax):
+    # Initialize the list to store all the segment lines
+    lines = []
+    
+    for command in turtle_string:
+        if command == 'F':
+            # Calculate the new x and y position
+            new_x = x + length * np.cos(np.radians(angle))
+            new_y = y + length * np.sin(np.radians(angle))
+            
+            # Random color for each segment
+            random_color = (random.random(), random.random(), random.random())  # RGB values
+            
+            # Draw the line segment from (x, y) to (new_x, new_y)
+            lines.append(((x, y), (new_x, new_y), random_color))
+            
+            # Update the current position
+            x, y = new_x, new_y
+
+        elif command == '+':
+            angle += 90  # Turn left by 90 degrees
+        elif command == '-':
+            angle -= 90  # Turn right by 90 degrees
+        else:
+            pass  # Ignore other characters (L and R) in drawing
+
+    # Plot the lines on the canvas
+    for line in lines:
+        (x1, y1), (x2, y2), color = line
+        ax.plot([x1, x2], [y1, y2], color=color, lw=0.7)
+        
+    return x, y
+
+# Define the L-system rules for the Hilbert curve
+axiom = 'L'
+rules = {
+    'L': '-RF+LFL+FR-',
+    'R': '+LF-RFR-FL+'
+}
+iterations = 5  # Adjust the iterations to change the order
+angle = 90
+
+# Generate the L-system string for the Hilbert curve
+hilbert_string = generate_lsystem(axiom, rules, iterations)
+
+# Calculate the step size based on desired size and iterations
+size = 400  # Total size of the Hilbert curve (adjust as needed)
+n = 2 ** iterations - 1
+length = size / n
+
+# Set up the Matplotlib figure
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.set_aspect('equal')
+ax.axis('off')  # Hide axes
+
+# Move to starting position (bottom center of the plot)
+start_x, start_y = 0, 0
+
+# Draw the Hilbert curve using Matplotlib
+final_x, final_y = draw_lsystem(hilbert_string, start_x, start_y, 0, length, ax)
+
+# Display the drawing
+plt.show()
+
+	
+</code></pre>
+
+<figure>
+          <img
+            src="https://github.com/Zboyan/labreports/blob/main/mfpic14.png?raw=true"
+            alt="ADD AN IMAGE HERE"
+            width="800"
+            height="800"
+            loading="lazy"
+          />
+        </figure>
+
+Experimental Code Set #11:
+	-Segment lengths were randomized between 0.8 and 1.2 while angles were randomized between 70 and 110 degrees.
+	-This set has lines cross over each due to the non-right angle potential.
+	
+<pre><code>
+
+import random
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Function to apply L-system rules
+def apply_rules(char, rules):
+    return rules.get(char, char)
+
+# Function to generate L-system string
+def generate_lsystem(axiom, rules, iterations):
+    current_string = axiom
+    for _ in range(iterations):
+        next_string = ''.join([apply_rules(char, rules) for char in current_string])
+        current_string = next_string
+    return current_string
+
+# Function to plot the L-system fractal using Matplotlib with randomization for length and angle
+def draw_lsystem(turtle_string, x, y, angle, length, ax):
+    # Initialize the list to store all the segment lines
+    lines = []
+    
+    for command in turtle_string:
+        if command == 'F':
+            # Randomize the length slightly (around base length)
+            random_length = length * random.uniform(0.8, 1.2)
+            
+            # Calculate the new x and y position
+            new_x = x + random_length * np.cos(np.radians(angle))
+            new_y = y + random_length * np.sin(np.radians(angle))
+            
+            # Random color for each segment
+            random_color = (random.random(), random.random(), random.random())  # RGB values
+            
+            # Draw the line segment from (x, y) to (new_x, new_y)
+            lines.append(((x, y), (new_x, new_y), random_color))
+            
+            # Update the current position
+            x, y = new_x, new_y
+
+        elif command == '+':
+            # Randomize the left turn angle between 70 and 110 degrees
+            angle += random.randint(70, 110)
+        elif command == '-':
+            # Randomize the right turn angle between 70 and 110 degrees
+            angle -= random.randint(70, 110)
+        else:
+            pass  # Ignore other characters (L and R) in drawing
+
+    # Plot the lines on the canvas
+    for line in lines:
+        (x1, y1), (x2, y2), color = line
+        ax.plot([x1, x2], [y1, y2], color=color, lw=0.7)
+        
+    return x, y
+
+# Define the L-system rules for the Hilbert curve
+axiom = 'L'
+rules = {
+    'L': '-RF+LFL+FR-',
+    'R': '+LF-RFR-FL+'
+}
+iterations = 5  # Adjust the iterations to change the order
+angle = 90
+
+# Generate the L-system string for the Hilbert curve
+hilbert_string = generate_lsystem(axiom, rules, iterations)
+
+# Calculate the step size based on desired size and iterations
+size = 400  # Total size of the Hilbert curve (adjust as needed)
+n = 2 ** iterations - 1
+length = size / n
+
+# Set up the Matplotlib figure
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.set_aspect('equal')
+ax.axis('off')  # Hide axes
+
+# Move to starting position (bottom center of the plot)
+start_x, start_y = 0, 0
+
+# Draw the Hilbert curve using Matplotlib
+final_x, final_y = draw_lsystem(hilbert_string, start_x, start_y, 0, length, ax)
+
+# Display the drawing
+plt.show()
+
+
+</code></pre>
+
+<figure>
+          <img
+            src="https://github.com/Zboyan/labreports/blob/main/mfpic14.png?raw=true"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="800"
+            loading="lazy"
+          />
+        </figure>
 	
       </section>
 
