@@ -809,6 +809,210 @@ plt.show()
             loading="lazy"
           />
         </figure>
+
+Experimental Code Set#8:
+	-The random color use was reomved and set to be a consistent color in green.
+	-The tree has exactly two birds randomly placed on it with their coordinates listed.
+	-The first bird is a red dot and the second is a blue dot with size of s = 50 for visibility.
+
+<pre><code>
+
+import random
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Function to apply L-system rules
+def apply_rule(char, rules):
+    return rules.get(char, char)
+
+# Function to generate L-system string
+def generate_lsystem(axiom, rules, iterations):
+    current_string = axiom
+    for _ in range(iterations):
+        current_string = ''.join([apply_rule(char, rules) for char in current_string])
+    return current_string
+
+# Function to plot the L-system fractal tree and place two birds randomly
+def draw_lsystem(turtle_string, x, y, angle, length, ax):
+    stack = []
+    bird_positions = []  # List to hold bird positions
+    bird_placed = 0  # Counter for birds
+
+    for command in turtle_string:
+        if command == 'F':
+            # Randomize the length slightly (around base length)
+            random_length = length * random.uniform(0.8, 1.2)
+            new_x = x + random_length * np.cos(np.radians(angle))
+            new_y = y + random_length * np.sin(np.radians(angle))
+
+            # Consistent color for all branches
+            branch_color = 'green'
+            ax.plot([x, new_x], [y, new_y], color=branch_color, lw=0.7)  # Draw the branch
+            x, y = new_x, new_y
+
+            # Place two birds randomly on the tree branches
+            if bird_placed < 2 and random.random() < 0.05:  # 5% chance to place a bird
+                bird_x = x + random.uniform(0.3, 0.7) * random_length * np.cos(np.radians(angle))
+                bird_y = y + random.uniform(0.3, 0.7) * random_length * np.sin(np.radians(angle))
+                bird_positions.append((bird_x, bird_y))  # Add bird position to list
+                bird_color = 'red' if bird_placed == 0 else 'blue'  # First bird red, second blue
+                ax.scatter(bird_x, bird_y, color=bird_color, s=50)  # Plot bird (as a red or blue dot)
+                bird_placed += 1  # Increment bird counter
+
+        elif command == '+':
+            angle += random.randint(20, 50)  # Random left angle
+        elif command == '-':
+            angle -= random.randint(20, 50)  # Random right angle
+        elif command == '[':
+            stack.append((x, y, angle))  # Save position and angle
+        elif command == ']':
+            x, y, angle = stack.pop()  # Restore position and angle
+
+    return x, y, bird_positions  # Return the final position and bird positions
+
+# Define the L-system rules
+rules = {'F': 'FF+[+F-F-F]-[-F+F+F]'}
+axiom = 'F'
+iterations = 4
+
+# Generate the L-system string
+turtle_string = generate_lsystem(axiom, rules, iterations)
+
+# Set up the figure
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.set_aspect('equal')
+ax.axis('off')  # Hide axes
+
+# Starting point and angle
+start_x, start_y = 0, 0
+start_angle = 90  # Angle pointing upwards
+base_length = 8  # Base branch length
+
+# Draw the fractal tree and place birds
+final_x, final_y, bird_positions = draw_lsystem(turtle_string, start_x, start_y, start_angle, base_length, ax)
+
+# Display the fractal tree
+plt.show()
+
+# Print bird positions
+print("Bird positions:")
+for i, pos in enumerate(bird_positions, 1):
+    print(f"Bird {i}: Position = {pos}")
+
+	
+</code></pre>
+
+<figure>
+          <img
+            src="https://github.com/Zboyan/labreports/blob/main/mfpic11.png?raw=true"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="800"
+            loading="lazy"
+          />
+        </figure>
+
+
+Experimental Code Set #9:
+	-The cap on birds was removed, such that many more birds are placed on the tree.
+	-All birds were set to red. 
+	-With the tree green and the birds red, this gives off a Holiday wreath look.
+
+<pre><code>
+
+import random
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Function to apply L-system rules
+def apply_rule(char, rules):
+    return rules.get(char, char)
+
+# Function to generate L-system string
+def generate_lsystem(axiom, rules, iterations):
+    current_string = axiom
+    for _ in range(iterations):
+        current_string = ''.join([apply_rule(char, rules) for char in current_string])
+    return current_string
+
+# Function to plot the L-system fractal tree and place birds
+def draw_lsystem(turtle_string, x, y, angle, length, ax):
+    stack = []
+    bird_positions = []  # List to hold bird positions
+
+    for command in turtle_string:
+        if command == 'F':
+            # Randomize the length slightly (around base length)
+            random_length = length * random.uniform(0.8, 1.2)
+            new_x = x + random_length * np.cos(np.radians(angle))
+            new_y = y + random_length * np.sin(np.radians(angle))
+
+            # Fixed color for all branches
+            branch_color = 'green'
+            ax.plot([x, new_x], [y, new_y], color=branch_color, lw=0.7)  # Draw the branch
+            x, y = new_x, new_y
+
+            # Randomly place a bird on the branch (at some position between 30% and 80% of branch length)
+            if random.random() < 0.01:  # 1% chance to place a bird on this branch
+                bird_x = x + random.uniform(0.3, 0.8) * random_length * np.cos(np.radians(angle))
+                bird_y = y + random.uniform(0.3, 0.8) * random_length * np.sin(np.radians(angle))
+                bird_positions.append((bird_x, bird_y))  # Add bird position to list
+                ax.scatter(bird_x, bird_y, color='red', s=50)  # Plot bird (as a red dot)
+
+        elif command == '+':
+            angle += random.randint(20, 50)  # Random left angle
+        elif command == '-':
+            angle -= random.randint(20, 50)  # Random right angle
+        elif command == '[':
+            stack.append((x, y, angle))  # Save position and angle
+        elif command == ']':
+            x, y, angle = stack.pop()  # Restore position and angle
+
+    return x, y, bird_positions  # Return the final position and bird positions
+
+# Define the L-system rules
+rules = {'F': 'FF+[+F-F-F]-[-F+F+F]'}
+axiom = 'F'
+iterations = 4
+
+# Generate the L-system string
+turtle_string = generate_lsystem(axiom, rules, iterations)
+
+# Set up the figure
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.set_aspect('equal')
+ax.axis('off')  # Hide axes
+
+# Starting point and angle
+start_x, start_y = 0, 0
+start_angle = 90  # Angle pointing upwards
+base_length = 8  # Base branch length
+
+# Draw the fractal tree and place birds
+final_x, final_y, bird_positions = draw_lsystem(turtle_string, start_x, start_y, start_angle, base_length, ax)
+
+# Display the fractal tree
+plt.show()
+
+# Print bird positions
+print("Bird positions:")
+for i, pos in enumerate(bird_positions, 1):
+    print(f"Bird {i}: Position = {pos}")
+
+	
+</code></pre>
+
+  <figure>
+          <img
+            src="https://github.com/Zboyan/labreports/blob/main/mfpic12.png?raw=true"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="800"
+            loading="lazy"
+          />
+        </figure>
+
+
 	
       </section>
 
@@ -833,7 +1037,7 @@ plt.show()
             src="https://github.com/Zboyan/labreports/blob/main/mfpic1.png?raw=true"
             alt="ADD AN IMAGE HERE"
             width="600"
-            height="400"
+            height="800"
             loading="lazy"
           />
         </figure>
