@@ -630,8 +630,185 @@ for ax, (probs, title) in zip(axs.flatten(), settings):
             loading="lazy"
           />
         </figure>
+
+Sample Code Set #3:
+	-This code draws a fractal tree using L-Systems (Lindenmayer systems) and turtle graphics.
+	-The custom library is imported to be able to use other functions and the turtle is initialized/shown.
+	-The L-System uses rules inside of characters, if there is no rule then the character is just returned.
+	-An axiom is the starting seed 'F' is used here, rules are how to replace characters, and iterations is how many times rules are applied.
+	-A very long string that builds the tree structure is built up by repeatedly replacing characters.
+	-Each character in the final string is interpreted as a turtle command:
+	- "F" move forward and draw a line.
+	- "+" turn left by the given angle.
+	- "-" turn right by the given angle.
+	- "[" is push the current position into a stack in order to save it.
+	- "]" is pop (restore) the last saved position.
+	- The push and pop make the branching happen.
+	- "F" is replaced by a complex string with 4 rounds of re-writing (iterations).
+	- The final string is stored in turtle_string and details the entire tree.
+	- The start of the string is set to 400x500, oriented up, and set to green color.
+	- Each line is 8 units long with turn of 25 degrees.
 	
+	<pre><code>
+
+# Initialize the turtle
+initializeTurtle()
+showturtle()
+
+# Function to apply L-system rules
+def apply_rule(char, rules):
+    return rules.get(char, char)
+
+# Function to generate L-system string
+def generate_lsystem(axiom, rules, iterations):
+    current_string = axiom
+    for _ in range(iterations):
+        current_string = ''.join([apply_rule(char, rules) for char in current_string])
+    return current_string
+
+# Function to draw the L-system with turtle
+def draw_lsystem(turtle_string, length, angle):
+    stack = []
+    for command in turtle_string:
+        if command == 'F':
+            forward(length)
+        elif command == '+':
+            left(angle)
+        elif command == '-':
+            right(angle)
+        elif command == '[':
+            position = (getx(), gety())
+            heading_angle = heading()
+            stack.append((position, heading_angle))
+        elif command == ']':
+            position, heading_angle = stack.pop()
+            jump(position[0], position[1])
+            face(heading_angle)
+
+# Define the L-system rules
+rules = {'F': 'FF+[+F-F-F]-[-F+F+F]'}
+
+axiom = 'F'
+iterations = 4
+
+# Generate the L-system string
+turtle_string = generate_lsystem(axiom, rules, iterations)
+
+# Set up the turtle
+jump(400, 500)
+face(0)
+color('green')
+
+# Draw the L-system fractal tree
+length = 8
+angle = 25
+draw_lsystem(turtle_string, length, angle)
+
+# Display the drawing
+show()
+
+		
+	</code></pre>
+
+	 <figure>
+          <img
+            src="https://github.com/Zboyan/labreports/blob/main/mfpic9.png?raw=true"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="800"
+            loading="lazy"
+          />
+        </figure>
 	
+
+
+Experimental Code Set #7:
+	-The code was converted from Turtle to MatplotLib in order to do random colors, angles, and branch length easier.
+	-Turtle's drawing commands became MatplotLib's ax.plot's.
+	-For each branch, a new endpoint was found.
+	-Branch lengths were randomized between 0.8 and 1.2 while angles were randomized between 20 and 50 degrees.
+	-The axes were hidden and the aspect ratio was maintained to ensure a clean picture.
+	-The tree is drawn as line segments, which works better in google colab.
+
+	<pre><code>
+
+import random
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Function to apply L-system rules
+def apply_rule(char, rules):
+    return rules.get(char, char)
+
+# Function to generate L-system string
+def generate_lsystem(axiom, rules, iterations):
+    current_string = axiom
+    for _ in range(iterations):
+        current_string = ''.join([apply_rule(char, rules) for char in current_string])
+    return current_string
+
+# Function to plot the L-system fractal tree
+def draw_lsystem(turtle_string, x, y, angle, length, ax):
+    stack = []
+    for command in turtle_string:
+        if command == 'F':
+            # Randomize the length slightly (around base length)
+            random_length = length * random.uniform(0.8, 1.2)
+            new_x = x + random_length * np.cos(np.radians(angle))
+            new_y = y + random_length * np.sin(np.radians(angle))
+
+            # Randomize color
+            random_color = (random.random(), random.random(), random.random())
+            ax.plot([x, new_x], [y, new_y], color=random_color, lw=0.7)  # Draw line
+            x, y = new_x, new_y
+
+        elif command == '+':
+            angle += random.randint(20, 50)  # Random left angle
+        elif command == '-':
+            angle -= random.randint(20, 50)  # Random right angle
+        elif command == '[':
+            stack.append((x, y, angle))  # Save position and angle
+        elif command == ']':
+            x, y, angle = stack.pop()  # Restore position and angle
+
+    return x, y  # Return the final position and angle
+
+# Define the L-system rules
+rules = {'F': 'FF+[+F-F-F]-[-F+F+F]'}
+axiom = 'F'
+iterations = 4
+
+# Generate the L-system string
+turtle_string = generate_lsystem(axiom, rules, iterations)
+
+# Set up the figure
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.set_aspect('equal')
+ax.axis('off')  # Hide axes
+
+# Starting point and angle
+start_x, start_y = 0, 0
+start_angle = 90  # Angle pointing upwards
+base_length = 8  # Base branch length
+
+# Draw the fractal tree
+draw_lsystem(turtle_string, start_x, start_y, start_angle, base_length, ax)
+
+# Display the fractal tree
+plt.show()
+
+		
+	</code></pre>
+
+	 <figure>
+          <img
+            src="https://github.com/Zboyan/labreports/blob/main/mfpic10.png?raw=true"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="800"
+            loading="lazy"
+          />
+        </figure>
 	
       </section>
 
