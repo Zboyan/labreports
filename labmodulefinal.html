@@ -1312,6 +1312,214 @@ plt.show()
             loading="lazy"
           />
         </figure>
+
+Experimental Code Set #12:
+	-
+
+
+<pre><code>
+
+import random
+import matplotlib.pyplot as plt
+import numpy as np
+
+# ---- Helper functions ----
+
+def generate_lsystem(axiom, rules, iterations):
+    """Generate an L-system string based on rules."""
+    current = axiom
+    for _ in range(iterations):
+        next_seq = ''.join([rules.get(c, c) for c in current])
+        current = next_seq
+    return current
+
+def draw_lsystem(lsystem, start_x, start_y, start_angle, base_length, ax):
+    """Draw an L-system from a string."""
+    x, y = start_x, start_y
+    angle = start_angle
+    stack = []
+
+    for command in lsystem:
+        if command == 'F':
+            rand_length = base_length * random.uniform(0.8, 1.2)
+            new_x = x + rand_length * np.cos(np.radians(angle))
+            new_y = y + rand_length * np.sin(np.radians(angle))
+            color = (random.random(), random.random(), random.random())
+            ax.plot([x, new_x], [y, new_y], color=color, lw=0.7)
+            x, y = new_x, new_y
+        elif command == '+':
+            angle += random.randint(20, 50)
+        elif command == '-':
+            angle -= random.randint(20, 50)
+        elif command == '[':
+            stack.append((x, y, angle))
+        elif command == ']':
+            x, y, angle = stack.pop()
+        else:
+            pass  # Ignore any other symbols
+
+    return x, y
+
+def draw_name_with_fractals(name, iterations=3):
+    """Draw a fractal for each letter of the name."""
+    fig, ax = plt.subplots(figsize=(12, 8))
+    ax.set_aspect('equal')
+    ax.axis('off')
+
+    # L-system base rules (same for every letter for now)
+    rules = {
+        'F': 'F+F-F-F+F'
+    }
+    axiom = 'F'
+
+    # Starting point
+    start_x, start_y = 0, 0
+    start_angle = 0
+    base_length = 5
+
+    spacing = 100  # Space between letters
+
+    for idx, letter in enumerate(name):
+        # Draw the fractal for this letter
+        lsystem_string = generate_lsystem(axiom, rules, iterations)
+        draw_lsystem(lsystem_string, start_x, start_y, start_angle, base_length, ax)
+
+        # Label the letter
+        ax.text(start_x, start_y - 20, letter, fontsize=14, ha='center')
+
+        # Move right for next letter
+        start_x += spacing
+
+    plt.show()
+
+# ---- Run it ----
+draw_name_with_fractals("C E Z", iterations=3)
+	
+</code></pre>
+
+ <figure>
+          <img
+            src="https://github.com/Zboyan/labreports/blob/main/mfpic16.png?raw=true"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="800"
+            loading="lazy"
+          />
+        </figure>
+
+Experimental Code Set #13:
+	-
+
+<pre><code>
+
+import matplotlib.pyplot as plt
+import numpy as np
+import random
+
+# Function to apply L-system rules
+def apply_rules(char, rules):
+    return rules.get(char, char)
+
+# Function to generate L-system string
+def generate_lsystem(axiom, rules, iterations):
+    current_string = axiom
+    for _ in range(iterations):
+        current_string = ''.join([apply_rules(c, rules) for c in current_string])
+    return current_string
+
+# Function to draw L-system
+def draw_lsystem(turtle_string, start_x, start_y, start_angle, length, angle, ax, color='green'):
+    x, y = start_x, start_y
+    current_angle = start_angle
+    stack = []
+
+    for command in turtle_string:
+        if command == 'F':
+            random_length = length * random.uniform(0.8, 1.2)
+            new_x = x + random_length * np.cos(np.radians(current_angle))
+            new_y = y + random_length * np.sin(np.radians(current_angle))
+            ax.plot([x, new_x], [y, new_y], color=color, lw=0.7)
+            x, y = new_x, new_y
+        elif command == '+':
+            current_angle += random.randint(20, 50)
+        elif command == '-':
+            current_angle -= random.randint(20, 50)
+        elif command == '[':
+            stack.append((x, y, current_angle))
+        elif command == ']':
+            x, y, current_angle = stack.pop()
+
+# Different fractal rules for each letter
+fractals = {
+    'C': {
+        'axiom': 'F',
+        'rules': {'F': 'F[+F]F[-F]F'},
+        'iterations': 3,
+        'color': 'blue'
+    },
+    'E': {
+        'axiom': 'F',
+        'rules': {'F': 'FF+[+F-F-F]-[-F+F+F]'},
+        'iterations': 3,
+        'color': 'green'
+    },
+    'Z': {
+        'axiom': 'X',
+        'rules': {'X': 'F-[[X]+X]+F[+FX]-X', 'F': 'FF'},
+        'iterations': 3,
+        'color': 'purple'
+    }
+}
+
+# Draw each letter with its own fractal
+def draw_name_with_custom_fractals(name):
+    fig, ax = plt.subplots(figsize=(14, 8))
+    ax.set_aspect('equal')
+    ax.axis('off')
+
+    start_x = 0
+    start_y = 0
+
+    spacing = 100  # Space between each letter's fractal
+
+    for i, letter in enumerate(name.split()):
+        if letter in fractals:
+            data = fractals[letter]
+            turtle_string = generate_lsystem(data['axiom'], data['rules'], data['iterations'])
+
+            x_shift = i * spacing  # Space each letter out
+            draw_lsystem(
+                turtle_string,
+                start_x + x_shift,
+                start_y,
+                start_angle=90,
+                length=5,
+                angle=25,
+                ax=ax,
+                color=data['color']
+            )
+
+            # Draw the letter below the fractal
+            ax.text(start_x + x_shift, start_y - 30, letter, fontsize=20, ha='center', va='top', color='black')
+
+    plt.show()
+
+# Run it!
+draw_name_with_custom_fractals("C E Z")
+
+	
+</code></pre>
+
+<figure>
+          <img
+            src="https://github.com/Zboyan/labreports/blob/main/mfpic17.png?raw=true"
+            alt="ADD AN IMAGE HERE"
+            width="1200"
+            height="800"
+            loading="lazy"
+          />
+        </figure>
+
 	
       </section>
 
