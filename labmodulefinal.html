@@ -35,7 +35,8 @@
 		the Barnsley Fern, 
 		the use of an L-System to plot a tree via Turtle graphics, 
 		the use of MatPlotLib to plot a tree, 
-		and Hilbert Curves via Turtle graphics. 
+		Hilbert Curves via Turtle graphics, 
+		and more!
 		
 		
         </p>
@@ -1314,8 +1315,19 @@ plt.show()
         </figure>
 
 Experimental Code Set #12:
-	-
-
+	-This code draws a rainbow fractal line extending from each letter, which can be thought of as a decoration from the letter.
+	-Each letter uses the same fractal rules, but they are just drawn from/originate at different letters at spaced positions.
+	-The fractals look different due to randomness of branch length, angles, and color even though they are based from the same rule of F+F-F-F+F
+	-Again, rules are applied to characters.
+	-Again, axioms, rules, and iterations are featured in order to make a complex fractal.
+	-(start_x,start_y) is the start position, start_angle is the direction of facing at beginning, and base_length is for segment length.
+	-Each character in the final string is interpreted as a turtle command:
+	- "F" move forward and draw a line, with length and color randomized.
+	- "+" turn left by the given angle, randomly selected between 20 and 50 degrees.
+	- "-" turn right by the given angle, randomly selected between 20 and 50 degrees.
+	- "[" is save/push the current position and angle into a stack in order to save it.
+	- "]" is return/pop (restore) the last saved position and angle.
+	
 
 <pre><code>
 
@@ -1408,7 +1420,21 @@ draw_name_with_fractals("C E Z", iterations=3)
         </figure>
 
 Experimental Code Set #13:
-	-
+	-Functions of MatPlotLib, Numpy, and Random are used.
+	-Again, rules are applied to characters.
+	-Again, axioms, rules, and iterations are featured in order to make a complex fractal.
+	-(x,y) is the current position, current_angle is the direction of facing, and stack saves the position/angles.
+	-Each character in the final string is interpreted as a turtle command:
+	- "F" move forward and draw a line, with length randomized between 80 and 120%.
+	- "+" turn left by the given angle, randomly selected between 20 and 50 degrees.
+	- "-" turn right by the given angle, randomly selected between 20 and 50 degrees.
+	- "[" is save/push the current position into a stack in order to save it.
+	- "]" is return/pop (restore) the last saved position.
+	- The letters that represent my initials "C" "E" and "Z" are used in correspondence with different fractals:
+	- The "C" is a "Simple Curve/tree-like fractal." 
+	- The "E" is "Symmetrical with lots of branches."
+	- The "Z" is "Complex, recursive "spiky" fractal."
+	-Each is then displayed side by side above thier respective letter with spacing 100.
 
 <pre><code>
 
@@ -1520,42 +1546,125 @@ draw_name_with_custom_fractals("C E Z")
           />
         </figure>
 
+Experimental Code Set #14:
+	-This code is essentially the same as "EC Set #12," but now each letter has its own fractal specific rule.
+
+<pre><code>
+
+import random
+import matplotlib.pyplot as plt
+import numpy as np
+
+# ---- Helper functions ----
+
+def generate_lsystem(axiom, rules, iterations):
+    """Generate an L-system string based on rules."""
+    current = axiom
+    for _ in range(iterations):
+        next_seq = ''.join([rules.get(c, c) for c in current])
+        current = next_seq
+    return current
+
+def draw_lsystem(lsystem, start_x, start_y, start_angle, base_length, ax):
+    """Draw an L-system from a string."""
+    x, y = start_x, start_y
+    angle = start_angle
+    stack = []
+
+    for command in lsystem:
+        if command == 'F':
+            rand_length = base_length * random.uniform(0.8, 1.2)
+            new_x = x + rand_length * np.cos(np.radians(angle))
+            new_y = y + rand_length * np.sin(np.radians(angle))
+            color = (random.random(), random.random(), random.random())
+            ax.plot([x, new_x], [y, new_y], color=color, lw=0.7)
+            x, y = new_x, new_y
+        elif command == '+':
+            angle += random.randint(20, 50)
+        elif command == '-':
+            angle -= random.randint(20, 50)
+        elif command == '[':
+            stack.append((x, y, angle))
+        elif command == ']':
+            x, y, angle = stack.pop()
+        else:
+            pass  # Ignore any other symbols
+
+    return x, y
+
+def draw_name_with_fractals(name, letter_rules, default_iterations=3):
+    """Draw a fractal for each letter of the name with custom rules."""
+    fig, ax = plt.subplots(figsize=(14, 8))
+    ax.set_aspect('equal')
+    ax.axis('off')
+
+    # Starting point
+    start_x, start_y = 0, 0
+    start_angle = 0
+    base_length = 5
+
+    spacing = 120  # Space between letters
+
+    for idx, letter in enumerate(name):
+        if letter in letter_rules:
+            settings = letter_rules[letter]
+            lsystem_string = generate_lsystem(settings['axiom'], settings['rules'], settings['iterations'])
+        else:
+            # Default behavior if letter not in custom rules
+            default_axiom = 'F'
+            default_rules = {'F': 'F+F-F-F+F'}
+            lsystem_string = generate_lsystem(default_axiom, default_rules, default_iterations)
+
+        draw_lsystem(lsystem_string, start_x, start_y, start_angle, base_length, ax)
+
+        # Label the letter
+        ax.text(start_x, start_y - 20, letter, fontsize=16, ha='center', color='black')
+
+        # Move right for next letter
+        start_x += spacing
+
+    plt.show()
+
+# ---- Letter-specific fractal rules ----
+
+letter_rules = {
+    'C': {
+        'axiom': 'F',
+        'rules': {'F': 'F+F-F+F-F'},
+        'iterations': 4,
+    },
+    'E': {
+        'axiom': 'F',
+        'rules': {'F': 'FF+[+F-F-F]-[-F+F+F]'},
+        'iterations': 3,
+    },
+    'Z': {
+        'axiom': 'X',
+        'rules': {'X': 'F-[[X]+X]+F[+FX]-X', 'F': 'FF'},
+        'iterations': 3,
+    }
+}
+
+# ---- Run it ----
+draw_name_with_fractals("CEZ", letter_rules)
+
 	
-      </section>
+</code></pre>
 
-      <!-- RESULTS & ANALYSIS SECTION -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <!-- -------------------------------------------------------------------------------------------- -->
-      <section id="results">
-      
-      
-        <h2>Results &amp; Analysis</h2>
-        <p>
-          ANALYSIS ANALYSIS ANALYSIS
-        </p>
-
-
-
-
-        <figure>
+ <figure>
           <img
-            src="https://github.com/Zboyan/labreports/blob/main/mfpic1.png?raw=true"
+            src="https://github.com/Zboyan/labreports/blob/main/mfpic18.png?raw=true"
             alt="ADD AN IMAGE HERE"
             width="600"
-            height="800"
+            height="2000"
             loading="lazy"
           />
         </figure>
 
+	
+      </section>
 
-</section>
-
-    
-	    
-
-
+      
 
       <!-- CONCLUSION SECTION -->
       <!-- -------------------------------------------------------------------------------------------- -->
@@ -1565,8 +1674,27 @@ draw_name_with_custom_fractals("C E Z")
       <section id="conclusion">
      	<h2>Conclusion</h2>
         <p>
-        OVERALL CONCLUSION HERE
+         The Final Module featured: 
+		using point-by-point fractal plotting as the Chaos Game for Siepinski Triangle, 
+		using point-by-point fractal plotting for Koch Snowflake, 
+		the Barnsley Fern, 
+		the use of an L-System to plot a tree via Turtle graphics, 
+		the use of MatPlotLib to plot a tree, 
+		Hilbert Curves via Turtle graphics, 
+		and more!
         </p>
+
+  <figure>
+          <img
+            src="https://github.com/Zboyan/labreports/blob/main/mfpic19.png?raw=true"
+            alt="ADD AN IMAGE HERE"
+            width="600"
+            height="800"
+            loading="lazy"
+          />
+        </figure>
+
+	      
       </section>
 
      
